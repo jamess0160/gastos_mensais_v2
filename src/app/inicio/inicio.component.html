@@ -1,0 +1,31 @@
+<header class="header">
+    <div>
+        <div class="headerText">Total de gastos</div>
+        <div class="headerText">R$ xxxx,xx</div>
+    </div>
+    <div>
+        <div class="headerText">Total de Ganhos</div>
+        <div class="headerText">R$ xxxx,xx</div>
+    </div>
+    <div>
+        <div class="headerText">Restante</div>
+        <div class="headerText">R$ xxxx,xx</div>
+    </div>
+</header>
+
+<div *ngFor="let item of this.bancos">
+    <div class="grupoTiles">
+        <div class="tiles">
+            <div>Total Alimentação {{item.nome}}</div>
+            <div>R${{item.totais.alimentacao}}</div>
+        </div>
+        <div class="tiles">
+            <div>Total Transportes {{item.nome}}</div>
+            <div>R${{item.totais.transportes}}</div>
+        </div>
+        <div class="tiles">
+            <div>Total Geral {{item.nome}}</div>
+            <div>R${{item.totais.geral}}</div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,49 @@
+.header {
+    width: 100vw;
+    height: 4rem;
+    margin-bottom: 5rem;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+    background-color: gray;
+}
+
+.header>div{
+    width: 20%;
+}
+
+.headerText {
+    font-family: "inter";
+    font-size: 25px;
+    text-align: center;
+}
+
+.grupoTiles {
+    width: 100vw;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    margin-bottom: 3rem;
+}
+
+.tiles {
+    width: 20%;
+    background-color: gray;
+    padding: 0.5rem 1rem 0.5rem 1rem;
+    height: 6rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    border-radius: 16px;
+}
+
+.tiles:hover{
+    cursor: pointer;
+}
+
+.tiles>div {
+    font-family: "inter";
+    font-size: 20px;
+    text-align: center;
+}
