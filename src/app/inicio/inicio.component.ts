@@ -18,7 +18,7 @@ export class InicioComponent {
       }
     },
     {
-      id: 1,
+      id: 2,
       nome: "Teste",
       cor: "#8A05BE",
       totais: {
@@ -28,7 +28,7 @@ export class InicioComponent {
       }
     },
     {
-      id: 1,
+      id: 3,
       nome: "Teste",
       cor: "#8A05BE",
       totais: {
@@ -38,4 +38,8 @@ export class InicioComponent {
       }
     }
   ]
+
+  abrirAdicionar(){
+    alert("adicionar")
+  }
 }

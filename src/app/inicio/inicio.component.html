@@ -13,19 +13,26 @@
     </div>
 </header>
 
-<div *ngFor="let item of this.bancos">
+<div *ngFor="let item of bancos">
     <div class="grupoTiles">
-        <div class="tiles">
+        <a class="tiles" href="/categorias/{{item.id}}">
             <div>Total Alimentação {{item.nome}}</div>
             <div>R${{item.totais.alimentacao}}</div>
-        </div>
-        <div class="tiles">
+        </a>
+        <a class="tiles" href="/categorias/{{item.id}}">
             <div>Total Transportes {{item.nome}}</div>
             <div>R${{item.totais.transportes}}</div>
-        </div>
-        <div class="tiles">
+        </a>
+        <a class="tiles" href="/categorias/{{item.id}}">
             <div>Total Geral {{item.nome}}</div>
             <div>R${{item.totais.geral}}</div>
-        </div>
+        </a>
     </div>
 </div>
+
+<footer>
+    <img src="../../assets/add.png" title="Adicionar" alt="Adicionar" (click)="abrirAdicionar()">
+    <a href="configuracoes">
+        <img src="../../assets/gear.png" title="Configurações" alt="Configurações">
+    </a>
+</footer>
