@@ -1,2 +1,2 @@
-export * from './entradas.module'
-export * from './shared'
+export * from './entrada.model'
+export * from './entrada.service'

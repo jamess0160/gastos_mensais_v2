@@ -1,2 +1,2 @@
-export * from './gastos.module'
-export * from './shared'
+export * from './gasto.model'
+export * from './gasto.service'
