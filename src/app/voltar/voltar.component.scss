@@ -1,0 +1,11 @@
+div{
+    padding: 0.5rem 0 0 0.5rem;
+}
+
+div>img{
+    height: 1.5rem;
+}
+
+div>img:hover{
+    cursor: pointer;
+}
