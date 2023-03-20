@@ -1,6 +1,6 @@
 export default class Gasto {
     constructor(
-        public id?: string,
+        public id?: number,
         public data_registro?: string,
         public data_gasto?: string,
         public descricao?: string,
