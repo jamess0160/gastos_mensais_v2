@@ -1,0 +1,17 @@
+.container {
+    width: 100%;
+    height: 100svh;
+    position: fixed;
+    top: 0;
+    background: rgba(255, 255, 255, 0.75);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    .dialog {
+        width: 30rem;
+        height: 30rem;
+        background-color: white;
+        border: 1px solid black;
+    }
+}

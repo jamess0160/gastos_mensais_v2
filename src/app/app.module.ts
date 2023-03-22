@@ -10,6 +10,7 @@ import { CategoriasComponent } from './categorias/categorias.component';
 import { GastoService } from './gastos';
 import { EntradaService } from './entradas';
 import { BancoService } from './bancos';
+import { AdicionarComponent } from './adicionar/adicionar.component';
 
 @NgModule({
   declarations: [
@@ -17,7 +18,8 @@ import { BancoService } from './bancos';
     InicioComponent,
     ConfiguracoesComponent,
     VoltarComponent,
-    CategoriasComponent
+    CategoriasComponent,
+    AdicionarComponent
   ],
   imports: [
     BrowserModule,

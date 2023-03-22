@@ -6,6 +6,9 @@ import { Component } from '@angular/core';
   styleUrls: ['./inicio.component.scss']
 })
 export class InicioComponent {
+
+  dialogOpen = false
+
   bancos = [
     {
       id: 1,
@@ -39,7 +42,7 @@ export class InicioComponent {
     }
   ]
 
-  abrirAdicionar(){
-    alert("adicionar")
+  abrirAdicionar() {
+    this.dialogOpen = true
   }
 }
