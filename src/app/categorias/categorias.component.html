@@ -1,1 +1,64 @@
-<p>categorias works!</p>
+<section>
+    <app-voltar></app-voltar>
+    <div [className]="'container ' + classeTiles[0]" *ngIf="tileGeral">
+        <h1 class="titulo">Geral</h1>
+        <table>
+            <tr *ngFor="let item of gastos.Geral">
+                <td>
+                    <div>{{item.data_gasto}}</div>
+                    <div>{{item.descricao}}</div>
+                    <div>{{item.valor ? 'R$' + item.valor: ''}}</div>
+                    <div [style]="item.descricao ? '' : 'display: none'">
+                        <img style="margin-right: 1rem;" src="../../assets/edit.png" alt="Adicionar" title="Adicionar">
+                        <img src="../../assets/delete.png" alt="Deletar" title="Deletar"
+                            (click)="confirmarDelete(item.id)">
+                    </div>
+                </td>
+            </tr>
+        </table>
+        <h1>R$ {{total.Geral}}</h1>
+    </div>
+    <div [className]="'container ' + classeTiles[1]" *ngIf="tileTransporte">
+        <h1 class="titulo">Transporte</h1>
+        <table>
+            <tr *ngFor="let item of gastos.Transporte">
+                <td>
+                    <div>{{item.data_gasto}}</div>
+                    <div>{{item.descricao}}</div>
+                    <div>{{item.valor ? 'R$' + item.valor: ''}}</div>
+                    <div [style]="item.descricao ? '' : 'display: none'">
+                        <img style="margin-right: 1rem;" src="../../assets/edit.png" alt="Adicionar" title="Adicionar">
+                        <img src="../../assets/delete.png" alt="Deletar" title="Deletar"
+                            (click)="confirmarDelete(item.id)">
+                    </div>
+                </td>
+            </tr>
+        </table>
+        <h1>R$ {{total.Transporte}}</h1>
+    </div>
+    <div [className]="'container ' + classeTiles[2]" *ngIf="tileAlimentacao">
+        <h1 class="titulo">Alimentação</h1>
+        <table>
+            <tr *ngFor="let item of gastos.Alimentacao">
+                <td>
+                    <div>{{item.data_gasto}}</div>
+                    <div>{{item.descricao}}</div>
+                    <div>{{item.valor ? 'R$' + item.valor: ''}}</div>
+                    <div [style]="item.descricao ? '' : 'display: none'">
+                        <img style="margin-right: 1rem;" src="../../assets/edit.png" alt="Adicionar" title="Adicionar">
+                        <img src="../../assets/delete.png" alt="Deletar" title="Deletar"
+                            (click)="confirmarDelete(item.id)">
+                    </div>
+                </td>
+            </tr>
+        </table>
+        <h1>R$ {{total.Alimentacao}}</h1>
+    </div>
+    <div class="imgContainer left" *ngIf="tipoCategoria !== 1">
+        <img src="../../assets/left-arrow.png" alt="Avançar" title="Próxima categoria" (click)="mudarPagina(-1)">
+    </div>
+    <div class="imgContainer right" *ngIf="tipoCategoria !== 3">
+        <img class="reverse" src="../../assets/left-arrow.png" alt="Avançar" title="Próxima categoria"
+            (click)="mudarPagina(1)">
+    </div>
+</section>

@@ -1,0 +1,145 @@
+section {
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow-x: hidden;
+}
+
+$containerWidth: 60vw;
+
+.container {
+    width: $containerWidth;
+    height: 70vh;
+    background-color: gray;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-direction: column;
+    padding: 2rem 0 2rem 0;
+    border-radius: 15px;
+
+    h1 {
+        font-family: "inter";
+        font-weight: normal;
+    }
+}
+
+.titulo {
+    text-decoration: underline;
+}
+
+table {
+    width: 80%;
+    height: calc(3rem * 10);
+    display: flex;
+    flex-direction: column;
+    border: 1px solid black;
+    border-radius: 15px 0 0 15px;
+    overflow-y: scroll;
+    margin: 1rem 0 1rem 0;
+
+    tr {
+        height: 10%;
+
+        td {
+            height: 100%;
+            padding: 0 1rem 0 1rem;
+            border-bottom: 1px solid black;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+
+            img {
+                width: 1.5rem;
+
+                &:hover {
+                    cursor: pointer;
+                }
+            }
+        }
+    }
+}
+
+.animarEntrar-E-D {
+    animation: moveFromLeft 400ms ease-in-out forwards;
+
+    @keyframes moveFromLeft {
+        0% {
+            transform: translateX(-200%);
+        }
+
+        100% {
+            transform: translateX(0px);
+        }
+    }
+}
+
+.animarEntrar-D-E {
+    animation: moveFromRight 400ms ease-in-out forwards;
+
+    @keyframes moveFromRight {
+        0% {
+            transform: translateX(200%);
+        }
+
+        100% {
+            transform: translateX(0px);
+        }
+    }
+}
+
+.animarSair-E {
+    animation: exitToLeft 400ms ease-in-out forwards;
+
+    @keyframes exitToLeft {
+        0% {
+            transform: translateX(0);
+        }
+
+        100% {
+            transform: translateX(-200%);
+        }
+    }
+}
+
+.animarSair-D {
+    animation: exitToRight 400ms ease-in-out forwards;
+
+    @keyframes exitToRight {
+        0% {
+            transform: translateX(0);
+        }
+
+        100% {
+            transform: translateX(200%);
+        }
+    }
+}
+
+.imgContainer {
+    position: fixed;
+    width: calc((100% - $containerWidth) / 2);
+    display: flex;
+    justify-content: center;
+
+    img {
+        width: 3rem;
+
+        &:hover {
+            cursor: pointer;
+        }
+    }
+}
+
+.left {
+    left: 0;
+}
+
+.right {
+    right: 0;
+}
+
+.reverse {
+    transform: scaleX(-1);
+}
