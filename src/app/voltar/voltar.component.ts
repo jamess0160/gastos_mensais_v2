@@ -7,6 +7,6 @@ import { Component } from '@angular/core';
 })
 export class VoltarComponent {
 	voltar() {
-		window.history.back()
+		location.href = "/inicio"
 	}
 }
