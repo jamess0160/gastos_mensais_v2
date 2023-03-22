@@ -7,10 +7,10 @@
     justify-content: space-around;
     align-items: center;
     background-color: gray;
-}
 
-.header>div {
-    width: 20%;
+    >div {
+        width: 20%;
+    }
 }
 
 .headerText {
@@ -38,16 +38,16 @@
     border-radius: 16px;
     color: black;
     text-decoration: none;
-}
 
-.tiles:hover {
-    cursor: pointer;
-}
+    >div {
+        font-family: "inter";
+        font-size: 20px;
+        text-align: center;
+    }
 
-.tiles>div {
-    font-family: "inter";
-    font-size: 20px;
-    text-align: center;
+    &:hover {
+        cursor: pointer;
+    }
 }
 
 footer {
@@ -59,14 +59,14 @@ footer {
     justify-content: end;
     align-items: center;
     height: 3rem;
-}
 
-footer>a>img,
-footer>img {
-    width: 30px;
-    margin-right: 1rem;
-}
+    >a>img,
+    >img {
+        width: 30px;
+        margin-right: 1rem;
 
-footer>img:hover {
-    cursor: pointer;
+        &:hover {
+            cursor: pointer;
+        }
+    }
 }
