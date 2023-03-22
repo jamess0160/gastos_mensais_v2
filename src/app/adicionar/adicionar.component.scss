@@ -7,11 +7,61 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    font-family: "inter";
 
     .dialog {
         width: 30rem;
-        height: 30rem;
+        height: 25rem;
         background-color: white;
         border: 1px solid black;
+        border-radius: 15px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: space-between;
+        padding: 1rem 0 1rem 0;
+    }
+}
+
+.campo {
+    position: relative;
+    width: 80%;
+    height: 2rem;
+    border: 1px solid black;
+    border-radius: 10px;
+
+    legend {
+        position: absolute;
+        left: 1rem;
+        top: -0.75rem;
+        background-color: white;
+    }
+
+    input {
+        width: 100%;
+        height: 100%;
+        border: 0;
+        outline: 0;
+        background: transparent;
+        padding-left: 1rem;
+        font-size: 1em;
+    }
+}
+
+.botoes {
+    width: 100%;
+    display: flex;
+    justify-content: space-around;
+
+    button {
+        width: 25%;
+        border: 1px solid black;
+        border-radius: 8px;
+        padding: 0.25rem;
+        background: white;
+
+        &:hover{
+            cursor: pointer;
+        }
     }
 }

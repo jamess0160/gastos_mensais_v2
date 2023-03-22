@@ -37,4 +37,4 @@
     </a>
 </footer>
 
-<app-adicionar [dialogOpen]="this.dialogOpen"></app-adicionar>
+<app-adicionar [dialogOpen]="this.dialogOpen" (dialogOpenChange)="this.dialogOpen=$event"></app-adicionar>

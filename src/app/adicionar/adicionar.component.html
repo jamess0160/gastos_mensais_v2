@@ -1,5 +1,30 @@
 <div class="container" *ngIf="this.dialogOpen">
     <div class="dialog">
-
+        <h1>Novo Gasto</h1>
+        <div class="campo">
+            <legend>Data</legend>
+            <input type="text">
+        </div>
+        <div class="campo">
+            <legend>Descrição</legend>
+            <input type="text">
+        </div>
+        <div class="campo">
+            <legend>Valor</legend>
+            <input type="text">
+        </div>
+        <div class="campo">
+            <legend>Tipo de gasto</legend>
+            <input type="text">
+        </div>
+        <div class="campo">
+            <legend>Banco</legend>
+            <input type="text">
+        </div>
+        
+        <div class="botoes">
+            <button (click)="fecharDialog()">Cancelar</button>
+            <button>Adicionar</button>
+        </div>
     </div>
 </div>
