@@ -1,14 +1,17 @@
 import { Injectable } from '@angular/core';
 import axios from 'axios';
 import { urlApi } from 'src/app/constants';
-import Banco from './banco.model';
+import Banco, { Tile } from './banco.model';
 
 @Injectable({
 	providedIn: 'root'
 })
 export class BancoService {
 
-	constructor() { }
+	async listarGastoPorBancos(): Promise<Tile[]> {
+		let { data } = await axios.get(`${urlApi}/bancos/gastosPorBanco`)
+		return data
+	}
 
 	async listarBancos(): Promise<Banco[]> {
 		let { data } = await axios.get(`${urlApi}/bancos`)
