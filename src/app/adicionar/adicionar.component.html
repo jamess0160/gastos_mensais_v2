@@ -3,28 +3,36 @@
         <h1>Novo Gasto</h1>
         <div class="campo">
             <legend>Data</legend>
-            <input type="text">
+            <input [(ngModel)]="formulario.data" type="date">
         </div>
         <div class="campo">
             <legend>Descrição</legend>
-            <input type="text">
+            <input [(ngModel)]="formulario.descricao" type="text">
         </div>
         <div class="campo">
             <legend>Valor</legend>
-            <input type="text">
+            <input [(ngModel)]="formulario.valor" type="number">
         </div>
         <div class="campo">
             <legend>Tipo de gasto</legend>
-            <input type="text">
+            <select [(ngModel)]="formulario.tipo">
+                <option value="0" selected disabled>Selecione um gasto</option>
+                <option value="1">Geral</option>
+                <option value="2">Transporte</option>
+                <option value="3">Alimentação</option>
+            </select>
         </div>
         <div class="campo">
             <legend>Banco</legend>
-            <input type="text">
+            <select [(ngModel)]="formulario.banco" *ngFor="let item of this.bancos">
+                <option value="0" selected disabled>Selecione um banco</option>
+                <option value="{{item.id}}">{{item.nome}}</option>
+            </select>
         </div>
-        
+
         <div class="botoes">
             <button (click)="fecharDialog()">Cancelar</button>
-            <button>Adicionar</button>
+            <button (click)="registrarGasto()">Adicionar</button>
         </div>
     </div>
 </div>
