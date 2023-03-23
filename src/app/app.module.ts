@@ -11,6 +11,7 @@ import { GastoService } from './gastos';
 import { EntradaService } from './entradas';
 import { BancoService } from './bancos';
 import { AdicionarComponent } from './adicionar/adicionar.component';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -23,7 +24,8 @@ import { AdicionarComponent } from './adicionar/adicionar.component';
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    FormsModule
   ],
   providers: [
     GastoService,
