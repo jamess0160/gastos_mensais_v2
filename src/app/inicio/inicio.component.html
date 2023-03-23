@@ -1,29 +1,29 @@
 <header class="header">
     <div>
         <div class="headerText">Total de gastos</div>
-        <div class="headerText">R$ xxxx,xx</div>
+        <div class="headerText">R$ {{totalGastos}}</div>
     </div>
     <div>
         <div class="headerText">Total de Ganhos</div>
-        <div class="headerText">R$ xxxx,xx</div>
+        <div class="headerText">R$ {{totalEntradas}}</div>
     </div>
     <div>
         <div class="headerText">Restante</div>
-        <div class="headerText">R$ xxxx,xx</div>
+        <div class="headerText">R$ {{restante}}</div>
     </div>
 </header>
 
 <div *ngFor="let item of bancos">
     <div class="grupoTiles">
-        <a class="tiles" href="/categorias/{{item.id}}">
+        <a class="tiles" [ngStyle]="{backgroundColor: item.cor}" [href]="item.id !== 0 ? '/categorias/' + item.id : ''">
             <div>Total Alimentação {{item.nome}}</div>
             <div>R${{item.totais.alimentacao}}</div>
         </a>
-        <a class="tiles" href="/categorias/{{item.id}}">
+        <a class="tiles" [ngStyle]="{backgroundColor: item.cor}" [href]="item.id !== 0 ? '/categorias/' + item.id : ''">
             <div>Total Transportes {{item.nome}}</div>
             <div>R${{item.totais.transportes}}</div>
         </a>
-        <a class="tiles" href="/categorias/{{item.id}}">
+        <a class="tiles" [ngStyle]="{backgroundColor: item.cor}" [href]="item.id !== 0 ? '/categorias/' + item.id : ''">
             <div>Total Geral {{item.nome}}</div>
             <div>R${{item.totais.geral}}</div>
         </a>
