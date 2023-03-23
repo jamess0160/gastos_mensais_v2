@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { BancoService } from '../bancos';
-import { Tile } from '../bancos/banco.model';
+import { BancoService, Tile } from '../bancos';
 import { EntradaService } from '../entradas';
 import utils from '../utils';
 
