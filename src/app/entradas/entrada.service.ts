@@ -10,20 +10,43 @@ export class EntradaService {
 
 	constructor() { }
 
-	async listarEntradasMes(mes: number = new Date().getMonth()): Promise<Entrada[]> {
-		let { data } = await axios.get(`${urlApi}/entradas/${mes}`)
-		return data
+	async listarEntradasMes(mes: number = new Date().getMonth() + 1): Promise<Entrada[]> {
+		try {
+			let { data } = await axios.get(`${urlApi}/entradas/${mes}`)
+			return data
+		} catch (error) {
+			alert("Ocorreu um erro ao buscar as entradas")
+			return []
+		}
 	}
 
-	async inserirEntrada(entrada: Entrada): Promise<void> {
-		await axios.post(`${urlApi}/entradas/`, entrada)
+	async inserirEntrada(entrada: Entrada): Promise<boolean> {
+		try {
+			await axios.post(`${urlApi}/entradas/`, entrada)
+			return true
+		} catch (error) {
+			alert("Ocorreu um erro ao inserir a Entrada")
+			return false
+		}
 	}
 
-	async atualizarEntrada(dadosNovos: Entrada, id: number): Promise<void> {
-		await axios.put(`${urlApi}/entradas/${id}`, dadosNovos)
+	async atualizarEntrada(dadosNovos: Entrada, id: number): Promise<boolean> {
+		try {
+			await axios.put(`${urlApi}/entradas/${id}`, dadosNovos)
+			return true
+		} catch (error) {
+			alert("Ocorreu um erro ao atualizar a Entrada")
+			return false
+		}
 	}
 
-	async deletarEntrada(id: number): Promise<void> {
-		await axios.delete(`${urlApi}/entradas/${id}`)
+	async deletarEntrada(id: number): Promise<boolean> {
+		try {
+			await axios.delete(`${urlApi}/entradas/${id}`)
+			return true
+		} catch (error) {
+			alert("Ocorreu um erro ao Deletar a Entrada")
+			return false
+		}
 	}
 }
