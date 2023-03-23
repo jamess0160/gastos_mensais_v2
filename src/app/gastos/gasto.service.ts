@@ -23,31 +23,41 @@ export class GastoService {
 			})
 			return data
 		} catch (error) {
+			console.error(error)
 			return []
 		}
 	}
 
-	async inserirGasto(gasto: Gasto): Promise<void> {
+	async inserirGasto(gasto: Gasto): Promise<boolean> {
 		try {
 			await axios.post(`${urlApi}/registro_gastos/`, gasto)
+			return true
 		} catch (error) {
+			console.error(error)
 			alert("Aconteceu um erro ao inserir")
+			return false
 		}
 	}
 
-	async atualizarGasto(dadosNovos: Gasto, id: number): Promise<void> {
+	async atualizarGasto(dadosNovos: Gasto, id: number): Promise<boolean> {
 		try {
 			await axios.put(`${urlApi}/registro_gastos/${id}`, dadosNovos)
+			return true
 		} catch (error) {
+			console.error(error)
 			alert("Aconteceu um erro ao atualizar")
+			return false
 		}
 	}
 
-	async deletarGasto(id: number): Promise<void> {
+	async deletarGasto(id: number): Promise<boolean> {
 		try {
 			await axios.delete(`${urlApi}/registro_gastos/${id}`)
+			return true
 		} catch (error) {
+			console.error(error)
 			alert("Aconteceu um erro ao deletar")
+			return false
 		}
 	}
 }
