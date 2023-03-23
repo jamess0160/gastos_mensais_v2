@@ -1,7 +1,21 @@
 import { Injectable } from '@angular/core';
 import axios from 'axios';
 import { urlApi } from 'src/app/constants';
-import Banco, { Tile } from './banco.model';
+
+export type Banco = {
+	id?: number,
+	nome?: string,
+	cor?: string,
+}
+
+export type Tile = Banco & {
+	totais: {
+		alimentacao: string,
+		transportes: string,
+		geral: string
+	},
+	total: number
+}
 
 @Injectable({
 	providedIn: 'root'
@@ -11,6 +25,17 @@ export class BancoService {
 	async listarGastoPorBancos(): Promise<Tile[]> {
 		let { data } = await axios.get(`${urlApi}/bancos/gastosPorBanco`)
 		return data
+	}
+
+	async pegarBancoPorId(id: number): Promise<Banco> {
+		try {
+			let { data } = await axios.get(`${urlApi}/bancos/porId/${id}`)
+			return data
+		} catch (error) {
+			alert("Ocorreu um erro ao buscar o banco por ID")
+			console.error(error)
+			return {}
+		}
 	}
 
 	async listarBancos(): Promise<Banco[]> {

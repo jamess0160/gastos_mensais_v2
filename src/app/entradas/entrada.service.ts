@@ -1,14 +1,17 @@
 import { Injectable } from '@angular/core';
 import axios from 'axios';
 import { urlApi } from 'src/app/constants';
-import Entrada from './entrada.model';
+
+export type Entrada = {
+	id: number,
+	nome: string,
+	valor: number,
+}
 
 @Injectable({
 	providedIn: 'root'
 })
 export class EntradaService {
-
-	constructor() { }
 
 	async listarEntradasMes(mes: number = new Date().getMonth() + 1): Promise<Entrada[]> {
 		try {

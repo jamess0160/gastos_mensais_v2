@@ -1,6 +1,5 @@
 import { Component, Input, Output, EventEmitter, OnInit } from '@angular/core';
-import { BancoService } from '../bancos';
-import Banco from '../bancos/banco.model';
+import { Banco, BancoService } from '../bancos';
 import { GastoService } from '../gastos';
 
 type Formulario = {

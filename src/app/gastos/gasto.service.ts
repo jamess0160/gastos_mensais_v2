@@ -1,7 +1,16 @@
 import { Injectable } from '@angular/core';
 import axios from 'axios';
 import { urlApi } from 'src/app/constants';
-import Gasto from './gasto.model';
+
+export type Gasto = {
+	id?: number,
+	data_gasto?: string,
+	data_registro?: string,
+	descricao?: string,
+	valor?: number,
+	tipo?: number,
+	banco_id?: number
+}
 
 @Injectable({
 	providedIn: 'root'

@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { GastoService } from '../gastos';
-import Gasto from '../gastos/gasto.model';
+import { Banco, BancoService } from '../bancos';
+import { Gasto, GastoService } from '../gastos';
 import utils from '../utils';
 
 type Categorias = {
@@ -24,10 +24,11 @@ type CategoriasTotal = {
 export class CategoriasComponent implements OnInit {
 	constructor(
 		private gastosAPI: GastoService,
-		private route: ActivatedRoute) { }
+		private route: ActivatedRoute,
+		private BancoService: BancoService) { }
 
 	tipoCategoria: number = 1
-	banco: number = 1
+	banco: Banco = {}
 
 	tileGeral: boolean = true
 	tileTransporte: boolean = false
@@ -51,14 +52,17 @@ export class CategoriasComponent implements OnInit {
 		Alimentacao: "00,00",
 	}
 
-	ngOnInit() {
-		this.banco = parseInt(this.route.snapshot.params['banco'])
+	async ngOnInit() {
+		this.banco = await this.BancoService.pegarBancoPorId(parseInt(this.route.snapshot.params['banco']))
 
 		utils.callInterval(this.atualizarTabela, 2000, "Ocorreu um erro ao atualizar a tabela", this)
 	}
 
 	async atualizarTabela() {
-		let dados = await this.gastosAPI.listarGastos(this.banco, this.tipoCategoria)
+		if (!this.banco.id) {
+			return
+		}
+		let dados = await this.gastosAPI.listarGastos(this.banco.id, this.tipoCategoria)
 
 		this.gastos = this.tratarCategorias(dados)
 		this.total = this.tratarCategoriasTotal(dados)
