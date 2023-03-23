@@ -102,7 +102,10 @@ export class CategoriasComponent implements OnInit {
 		}
 	}
 
-	async confirmarDelete(id: number) {
+	async confirmarDelete(id?: number) {
+		if (!id) {
+			return
+		}
 		if (!confirm("Você deseja mesmo deletar esse registro?")) {
 			return
 		}
