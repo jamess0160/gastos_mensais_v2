@@ -1,38 +1,61 @@
-<header class="header">
-    <div>
-        <div class="headerText">Total de gastos</div>
-        <div class="headerText">R$ {{totalGastos}}</div>
-    </div>
-    <div>
-        <div class="headerText">Total de Ganhos</div>
-        <div class="headerText">R$ {{totalEntradas}}</div>
-    </div>
-    <div>
-        <div class="headerText">Restante</div>
-        <div class="headerText">R$ {{restante}}</div>
-    </div>
-</header>
-
-<div class="grupoTiles" *ngFor="let item of bancos">
-    <a class="tiles" [ngStyle]="{backgroundColor: item.cor}" [href]="item.id !== 0 ? '/categorias/' + item.id : ''">
-        <div>Total Geral {{item.nome}}</div>
-        <div>R${{item.totais.geral}}</div>
-    </a>
-    <a class="tiles" [ngStyle]="{backgroundColor: item.cor}" [href]="item.id !== 0 ? '/categorias/' + item.id : ''">
-        <div>Total Transportes {{item.nome}}</div>
-        <div>R${{item.totais.transportes}}</div>
-    </a>
-    <a class="tiles" [ngStyle]="{backgroundColor: item.cor}" [href]="item.id !== 0 ? '/categorias/' + item.id : ''">
-        <div>Total Alimentação {{item.nome}}</div>
-        <div>R${{item.totais.alimentacao}}</div>
-    </a>
-</div>
-
-<footer>
-    <img src="../../assets/add.png" title="Adicionar" alt="Adicionar" (click)="abrirAdicionar()">
+<div class="container">
     <a href="configuracoes">
-        <img src="../../assets/gear.png" title="Configurações" alt="Configurações">
+        <img class="config" src="../../assets/gear.png" title="Configurações" alt="Configurações">
     </a>
-</footer>
 
-<app-adicionar [dialogOpen]="this.dialogOpen" (dialogOpenChange)="this.dialogOpen=$event"></app-adicionar>
+    <div class="totais">
+        <div style="background-color: #1E1F22">
+            <div class="title">Total de gastos</div>
+            <div class="body">R$ {{totalGastos}}</div>
+        </div>
+        <div style="background-color: #554C55">
+            <div class="title">Total de ganhos</div>
+            <div class="body">R$ {{totalEntradas}}</div>
+        </div>
+        <div style="background-color: #315663">
+            <div class="title" style="color: #D2D2D2;">Restante</div>
+            <div class="body">R$ {{restante}}</div>
+        </div>
+    </div>
+
+    <div class="data">
+        <div class="mes-ano">{{mesAtual}}, {{anoAtual}}</div>
+        <div class="dia">dia {{diaAtual}}</div>
+    </div>
+
+    <div class="grupoTiles" *ngFor="let item of bancos">
+        <a class="tiles" [href]="item.id !== 0 ? '/categorias/' + item.id : ''">
+            <div class="iconeBanco">
+                <img
+                    [src]="item.icone ? '../../assets/iconesBancos' + item.icone : '../../assets/iconesBancos/padrao.svg'">
+                {{item.nome}}
+            </div>
+            <div class="title">Compras em geral</div>
+            <div class="total">R${{item.totais.geral}}</div>
+        </a>
+        <a class="tiles" [href]="item.id !== 0 ? '/categorias/' + item.id : ''">
+            <div class="title">Transportes</div>
+            <div class="total">R${{item.totais.transportes}}</div>
+        </a>
+        <a class="tiles" [href]="item.id !== 0 ? '/categorias/' + item.id : ''">
+            <div class="title">Alimentação</div>
+            <div class="total">R${{item.totais.alimentacao}}</div>
+        </a>
+        <a class="tiles" [href]="item.id !== 0 ? '/categorias/' + item.id : ''">
+            <div class="title">Total de gastos</div>
+            <div class="total">R${{item.total}}</div>
+        </a>
+    </div>
+
+    <div class="adicionarBanco" (click)="abrirAdicionarBanco()">
+        <img src="../../assets/add.png" title="Adicionar">
+        Adicionar um banco
+    </div>
+
+    <img class="add" src="../../assets/add.png" title="Adicionar" alt="Adicionar" (click)="abrirAdicionar()">
+
+    <app-adicionar [dialogOpen]="this.dialogGasto" (dialogOpenChange)="this.dialogGasto=$event"></app-adicionar>
+
+    <app-adicionar-banco [dialogOpen]="this.dialogBanco"
+        (dialogOpenChange)="this.dialogBanco=$event"></app-adicionar-banco>
+</div>

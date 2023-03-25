@@ -12,7 +12,14 @@ export class InicioComponent implements OnInit {
 
     constructor(private BancoService: BancoService, private EntradaService: EntradaService) { }
 
-    dialogOpen = false
+    meses: string[] = ["Janeiro", "Fevereiro", "Março", "Abril", "Maio", "Junho", "Julho", "Agosto", "Setembro", "Outubro", "Novembro", "Dezembro"]
+
+    diaAtual: number = new Date().getDate()
+    mesAtual: string = this.meses[new Date().getMonth()]
+    anoAtual: number = new Date().getFullYear()
+
+    dialogGasto = false
+    dialogBanco = false
 
     bancos: Tile[] = []
     totalGastos: string = ""
@@ -24,29 +31,19 @@ export class InicioComponent implements OnInit {
     }
 
     async carregarDados() {
-        let dadosBancos = await this.BancoService.listarGastoPorBancos()
+        this.bancos = await this.BancoService.listarGastoPorBancos()
         let entradas = await this.EntradaService.listarEntradasMes()
 
-        this.totalGastos = dadosBancos.reduce((anterior, atual) => anterior + atual.total, 0).toFixed(2)
+        this.totalGastos = this.bancos.reduce((anterior, atual) => anterior + atual.total, 0).toFixed(2)
         this.totalEntradas = entradas.reduce((anterior, atual) => anterior + atual.valor, 0).toFixed(2)
         this.restante = (parseInt(this.totalEntradas) - parseInt(this.totalGastos)).toFixed(2)
-
-        this.bancos = [
-            {
-                id: 0,
-                nome: "",
-                total: 0,
-                totais: {
-                    geral: dadosBancos.reduce((anterior, atual) => anterior + parseInt(atual.totais.geral), 0).toFixed(2),
-                    transportes: dadosBancos.reduce((anterior, atual) => anterior + parseInt(atual.totais.transportes), 0).toFixed(2),
-                    alimentacao: dadosBancos.reduce((anterior, atual) => anterior + parseInt(atual.totais.alimentacao), 0).toFixed(2)
-                }
-            },
-            ...dadosBancos
-        ]
     }
 
     abrirAdicionar() {
-        this.dialogOpen = true
+        this.dialogGasto = true
+    }
+
+    abrirAdicionarBanco(){
+        this.dialogBanco = true
     }
 }
