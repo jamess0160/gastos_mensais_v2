@@ -11,22 +11,33 @@ $containerWidth: 60vw;
 .container {
     width: $containerWidth;
     height: 70vh;
-    background-color: gray;
+    background-color: #232323;
     display: flex;
     align-items: center;
     justify-content: space-between;
     flex-direction: column;
     padding: 2rem 0 2rem 0;
     border-radius: 15px;
-
-    h1 {
-        font-family: "inter";
-        font-weight: normal;
-    }
+    color: #D9D9D9;
+    font-family: 'Lexend', sans-serif;
 }
 
 .titulo {
-    text-decoration: underline;
+    width: 80%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    .iconeBanco {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        gap: 0.5rem;
+
+        img {
+            width: 3rem;
+        }
+    }
 }
 
 table {
@@ -34,7 +45,7 @@ table {
     height: calc(3rem * 10);
     display: flex;
     flex-direction: column;
-    border: 1px solid black;
+    border: 1px solid #D9D9D9;
     border-radius: 15px 0 0 15px;
     overflow-y: scroll;
     margin: 1rem 0 1rem 0;
@@ -45,13 +56,13 @@ table {
         td {
             height: 100%;
             padding: 0 1rem 0 1rem;
-            border-bottom: 1px solid black;
+            border-bottom: 1px solid #D9D9D9;
             display: flex;
             justify-content: space-between;
             align-items: center;
 
             img {
-                width: 1.5rem;
+                width: 1.25rem;
 
                 &:hover {
                     cursor: pointer;
