@@ -5,7 +5,8 @@ import { urlApi } from 'src/app/constants';
 export type Banco = {
 	id?: number,
 	nome?: string,
-	cor?: string,
+	icone?: string,
+	posicao?: number
 }
 
 export type Tile = Banco & {
@@ -39,19 +40,45 @@ export class BancoService {
 	}
 
 	async listarBancos(): Promise<Banco[]> {
-		let { data } = await axios.get(`${urlApi}/bancos`)
-		return data
+		try {
+			let { data } = await axios.get(`${urlApi}/bancos`)
+			return data
+		} catch (error) {
+			console.error(error)
+			return []
+		}
 	}
 
-	async inserirBanco(banco: Banco): Promise<void> {
-		await axios.post(`${urlApi}/bancos/`, banco)
+	async inserirBanco(banco: Banco): Promise<boolean> {
+		try {
+			await axios.post(`${urlApi}/bancos/`, banco)
+			return true
+		} catch (error) {
+			alert("Ocorreu um erro ao adicionar o banco")
+			console.error(error)
+			return false
+		}
 	}
 
-	async atualizarBanco(banco: Banco, id: number): Promise<void> {
-		await axios.put(`${urlApi}/bancos/${id}`, banco)
+	async atualizarBanco(banco: Banco, id: number): Promise<boolean> {
+		try {
+			await axios.put(`${urlApi}/bancos/${id}`, banco)
+			return true
+		} catch (error) {
+			alert("Ocorreu um erro ao atualizar o banco")
+			console.error(error)
+			return false
+		}
 	}
 
-	async deletarBanco(id: number): Promise<void> {
-		await axios.delete(`${urlApi}/bancos/${id}`)
+	async deletarBanco(id: number): Promise<boolean> {
+		try {
+			await axios.delete(`${urlApi}/bancos/${id}`)
+			return true
+		} catch (error) {
+			alert("Ocorreu um erro ao deletar o banco")
+			console.error(error)
+			return false
+		}
 	}
 }
