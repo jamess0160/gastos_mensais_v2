@@ -1,0 +1,22 @@
+<div class="container" *ngIf="this.dialogOpen">
+    <div class="dialog">
+        <h1>Novo Banco</h1>
+        <div class="campo">
+            <legend>Nome</legend>
+            <input [(ngModel)]="formulario.nome" type="text">
+        </div>
+        <div class="campo">
+            <legend>Icone</legend>
+            <input [(ngModel)]="formulario.icone" type="text">
+        </div>
+        <div class="campo">
+            <legend>Posição</legend>
+            <input [(ngModel)]="formulario.posicao" type="number">
+        </div>
+
+        <div class="botoes">
+            <button class="cancelar" (click)="fecharDialog()">Cancelar</button>
+            <button class="cadastrar" (click)="registrarBanco()">Cadastrar</button>
+        </div>
+    </div>
+</div>
