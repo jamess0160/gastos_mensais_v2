@@ -12,6 +12,8 @@ import { EntradaService } from './entradas';
 import { BancoService } from './bancos';
 import { AdicionarComponent } from './adicionar/adicionar.component';
 import { FormsModule } from '@angular/forms';
+import { AdicionarBancoComponent } from './adicionar-banco/adicionar-banco.component';
+import { EditarComponent } from './editar/editar.component';
 
 @NgModule({
   declarations: [
@@ -20,7 +22,9 @@ import { FormsModule } from '@angular/forms';
     ConfiguracoesComponent,
     VoltarComponent,
     CategoriasComponent,
-    AdicionarComponent
+    AdicionarComponent,
+    AdicionarBancoComponent,
+    EditarComponent
   ],
   imports: [
     BrowserModule,
