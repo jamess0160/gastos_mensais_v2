@@ -62,11 +62,13 @@
         <table>
             <tr *ngFor="let item of gastos.Alimentacao">
                 <td>
-                    <div>{{item.data_gasto}}</div>
+                    <div>{{item.parcela_atual ? '(' + ('00' + item.parcela_atual).slice(-2) + '/' + ('00' + item.parcelas_totais).slice(-2) + ')' :
+                        item.data_gasto}}</div>
                     <div>{{item.descricao}}</div>
                     <div>{{item.valor ? 'R$' + item.valor: ''}}</div>
                     <div [style]="item.descricao ? '' : 'display: none'">
-                        <img style="margin-right: 1rem;" src="../../assets/edit.png" alt="Adicionar" title="Adicionar">
+                        <img style="margin-right: 1rem;" src="../../assets/edit.png" alt="Adicionar" title="Adicionar"
+                            (click)="editar(item)">
                         <img src="../../assets/delete.png" alt="Deletar" title="Deletar"
                             (click)="confirmarDelete(item.id)">
                     </div>
@@ -82,4 +84,7 @@
         <img class="reverse" src="../../assets/left-arrow.png" alt="Avançar" title="Próxima categoria"
             (click)="mudarPagina(1)">
     </div>
+
+    <app-editar [dialogOpen]="dialogEditar" [formulario]="editarForm"
+        (dialogOpenChange)="dialogEditar = $event"></app-editar>
 </section>

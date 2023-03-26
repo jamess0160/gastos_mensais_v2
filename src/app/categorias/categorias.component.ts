@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import * as moment from 'moment';
 import { Banco, BancoService } from '../bancos';
+import { Formulario } from '../editar/editar.component';
 import { Gasto, GastoService } from '../gastos';
 import utils from '../utils';
 
@@ -50,6 +52,18 @@ export class CategoriasComponent implements OnInit {
 		Geral: "00,00",
 		Transporte: "00,00",
 		Alimentacao: "00,00",
+	}
+
+	dialogEditar: boolean = false
+	editarForm: Formulario = {
+		id: 0,
+		data: "",
+		descricao: "",
+		parcela_atual: 0,
+		parcelas_totais: 0,
+		valor: 0,
+		tipo: "",
+		banco: ""
 	}
 
 	async ngOnInit() {
@@ -156,5 +170,18 @@ export class CategoriasComponent implements OnInit {
 		}
 
 		this.atualizarTabela()
+	}
+
+	editar(itemEditar: Gasto) {
+		this.dialogEditar = true
+
+		if (itemEditar.data_gasto) this.editarForm.data = moment(itemEditar.data_gasto, "DD/MM/YYYY").format('YYYY-MM-DD')
+		if (itemEditar.banco_id) this.editarForm.banco = itemEditar.banco_id.toString()
+		if (itemEditar.descricao) this.editarForm.descricao = itemEditar.descricao
+		if (itemEditar.parcela_atual) this.editarForm.parcela_atual = itemEditar.parcela_atual
+		if (itemEditar.parcelas_totais) this.editarForm.parcelas_totais = itemEditar.parcelas_totais
+		if (itemEditar.tipo) this.editarForm.tipo = itemEditar.tipo.toString()
+		if (itemEditar.valor) this.editarForm.valor = itemEditar.valor
+		if (itemEditar.id) this.editarForm.id = itemEditar.id
 	}
 }

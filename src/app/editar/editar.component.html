@@ -1,1 +1,46 @@
-<p>editar works!</p>
+<div class="container" *ngIf="this.dialogOpen">
+    <div class="dialog">
+        <h1>Novo Gasto</h1>
+        <div class="campo">
+            <legend>Data</legend>
+            <input [(ngModel)]="formulario.data" type="date">
+        </div>
+        <div class="campo">
+            <legend>Descrição</legend>
+            <input [(ngModel)]="formulario.descricao" type="text">
+        </div>
+        <div class="campo">
+            <legend>Parcela atual</legend>
+            <input [(ngModel)]="formulario.parcela_atual" type="number">
+        </div>
+        <div class="campo">
+            <legend>Parcelas totais</legend>
+            <input [(ngModel)]="formulario.parcelas_totais" type="number">
+        </div>
+        <div class="campo">
+            <legend>Valor</legend>
+            <input [(ngModel)]="formulario.valor" type="number">
+        </div>
+        <div class="campo">
+            <legend>Tipo de gasto</legend>
+            <select [(ngModel)]="formulario.tipo">
+                <option value="0" selected disabled>Selecione um gasto</option>
+                <option value="1">Geral</option>
+                <option value="2">Transporte</option>
+                <option value="3">Alimentação</option>
+            </select>
+        </div>
+        <div class="campo">
+            <legend>Banco</legend>
+            <select [(ngModel)]="formulario.banco">
+                <option value="0" selected disabled>Selecione um banco</option>
+                <option *ngFor="let item of this.bancos" value="{{item.id}}">{{item.nome}}</option>
+            </select>
+        </div>
+
+        <div class="botoes">
+            <button class="cancelar" (click)="fecharDialog()">Cancelar</button>
+            <button class="editar" (click)="editarGasto()">Editar</button>
+        </div>
+    </div>
+</div>
