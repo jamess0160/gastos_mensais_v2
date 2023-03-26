@@ -32,9 +32,9 @@
         </div>
         <div class="campo">
             <legend>Banco</legend>
-            <select [(ngModel)]="formulario.banco" *ngFor="let item of this.bancos">
+            <select [(ngModel)]="formulario.banco">
                 <option value="0" selected disabled>Selecione um banco</option>
-                <option value="{{item.id}}">{{item.nome}}</option>
+                <option *ngFor="let item of this.bancos" value="{{item.id}}">{{item.nome}}</option>
             </select>
         </div>
 

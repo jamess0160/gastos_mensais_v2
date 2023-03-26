@@ -72,7 +72,6 @@ export class AdicionarComponent implements OnInit {
 	}
 
 	validarFormulario() {
-		if (!this.formulario.data) return false
 		if (!this.formulario.banco) return false
 		if (!this.formulario.descricao) return false
 		if (!this.formulario.valor) return false
