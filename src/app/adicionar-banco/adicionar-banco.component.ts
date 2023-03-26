@@ -4,7 +4,7 @@ import { Banco, BancoService } from '../bancos';
 type Formulario = {
 	nome: string,
 	icone: string,
-	posicao: string
+	posicao: number
 }
 
 @Component({
@@ -22,7 +22,7 @@ export class AdicionarBancoComponent {
 	formulario: Formulario = {
 		nome: "",
 		icone: "",
-		posicao: ""
+		posicao: 0
 	}
 
 	fecharDialog() {
@@ -38,7 +38,7 @@ export class AdicionarBancoComponent {
 		let sucesso = await this.BancoService.inserirBanco({
 			nome: this.formulario.nome,
 			icone: this.formulario.icone,
-			posicao: parseInt(this.formulario.posicao)
+			posicao: this.formulario.posicao
 		})
 
 		if (!sucesso) return
