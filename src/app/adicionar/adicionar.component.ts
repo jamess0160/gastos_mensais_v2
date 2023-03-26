@@ -5,6 +5,8 @@ import { GastoService } from '../gastos';
 type Formulario = {
 	data: string,
 	descricao: string,
+	parcela_atual: number,
+	parcelas_totais: number,
 	valor: number,
 	tipo: string,
 	banco: string
@@ -25,6 +27,8 @@ export class AdicionarComponent implements OnInit {
 	formulario: Formulario = {
 		data: "",
 		descricao: "",
+		parcela_atual: 0,
+		parcelas_totais: 0,
 		valor: 0,
 		tipo: "",
 		banco: ""
@@ -55,6 +59,8 @@ export class AdicionarComponent implements OnInit {
 			data_gasto: this.formulario.data,
 			banco_id: parseInt(this.formulario.banco),
 			descricao: this.formulario.descricao,
+			parcela_atual: this.formulario.parcela_atual,
+			parcelas_totais: this.formulario.parcelas_totais,
 			valor: this.formulario.valor,
 			tipo: parseInt(this.formulario.tipo)
 		})
