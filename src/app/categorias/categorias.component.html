@@ -62,7 +62,8 @@
         <table>
             <tr *ngFor="let item of gastos.Alimentacao">
                 <td>
-                    <div>{{item.parcela_atual ? '(' + ('00' + item.parcela_atual).slice(-2) + '/' + ('00' + item.parcelas_totais).slice(-2) + ')' :
+                    <div>{{item.parcela_atual ? '(' + ('00' + item.parcela_atual).slice(-2) + '/' + ('00' +
+                        item.parcelas_totais).slice(-2) + ')' :
                         item.data_gasto}}</div>
                     <div>{{item.descricao}}</div>
                     <div>{{item.valor ? 'R$' + item.valor: ''}}</div>

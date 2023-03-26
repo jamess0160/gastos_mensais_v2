@@ -60,6 +60,14 @@ table {
             display: flex;
             justify-content: space-between;
             align-items: center;
+            
+            div {
+                width: 30%;
+            }
+
+            div:last-child{
+                width: auto;
+            }
 
             img {
                 width: 1.25rem;
