@@ -21,7 +21,7 @@ export class InicioComponent implements OnInit {
     dialogGasto = false
     dialogBanco = false
 
-    bancos: Tile[] = []
+    tiles: Tile[] = []
     totalGastos: string = ""
     totalEntradas: string = ""
     restante: string = ""
@@ -31,10 +31,10 @@ export class InicioComponent implements OnInit {
     }
 
     async carregarDados() {
-        this.bancos = await this.BancoService.listarGastoPorBancos()
+        this.tiles = await this.BancoService.listarGastoPorBancos()
         let entradas = await this.EntradaService.listarEntradasMes()
 
-        this.totalGastos = this.bancos.reduce((anterior, atual) => anterior + atual.total, 0).toFixed(2)
+        this.totalGastos = this.tiles.reduce((anterior, atual) => anterior + parseInt(atual.total), 0).toFixed(2)
         this.totalEntradas = entradas.reduce((anterior, atual) => anterior + atual.valor, 0).toFixed(2)
         this.restante = (parseInt(this.totalEntradas) - parseInt(this.totalGastos)).toFixed(2)
     }
@@ -45,5 +45,10 @@ export class InicioComponent implements OnInit {
 
     abrirAdicionarBanco(){
         this.dialogBanco = true
+    }
+
+    editarBanco(event: Event){
+        event.preventDefault()
+        
     }
 }

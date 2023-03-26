@@ -23,11 +23,11 @@
         <div class="dia">dia {{diaAtual}}</div>
     </div>
 
-    <div class="grupoTiles" *ngFor="let item of bancos">
+    <div class="grupoTiles" *ngFor="let item of tiles">
         <a class="tiles" [href]="item.id !== 0 ? '/categorias/' + item.id : ''">
-            <div class="iconeBanco">
+            <div class="iconeBanco" (click)="editarBanco($event)" title="Editar Banco">
                 <img
-                    [src]="item.icone ? '../../assets/iconesBancos' + item.icone : '../../assets/iconesBancos/padrao.svg'">
+                    [src]="item.icone ? '../../assets/iconesBancos/' + item.icone : '../../assets/iconesBancos/padrao.svg'">
                 {{item.nome}}
             </div>
             <div class="title">Compras em geral</div>
