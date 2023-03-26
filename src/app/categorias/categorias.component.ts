@@ -29,12 +29,12 @@ export class CategoriasComponent implements OnInit {
 		private route: ActivatedRoute,
 		private BancoService: BancoService) { }
 
-	tipoCategoria: number = 1
+	tipoCategoria: number = parseInt(this.route.snapshot.params['categoria'])
 	banco: Banco = {}
 
-	tileGeral: boolean = true
-	tileTransporte: boolean = false
-	tileAlimentacao: boolean = false
+	tileGeral: boolean = this.tipoCategoria === 1
+	tileTransporte: boolean = this.tipoCategoria === 2
+	tileAlimentacao: boolean = this.tipoCategoria === 3
 
 	classeTiles: string[] = [
 		"animarEntrar-E-D",

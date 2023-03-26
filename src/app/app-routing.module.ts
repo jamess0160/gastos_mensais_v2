@@ -15,7 +15,7 @@ const routes: Routes = [
 		component: InicioComponent
 	},
 	{
-		path: "categorias/:banco",
+		path: "categorias/:banco/:categoria",
 		component: CategoriasComponent
 	},
 	{
