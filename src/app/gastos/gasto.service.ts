@@ -50,7 +50,7 @@ export class GastoService {
 		}
 	}
 
-	async atualizarGasto(dadosNovos: Gasto, id: number): Promise<boolean> {
+	async atualizarGasto(id: number, dadosNovos: Gasto): Promise<boolean> {
 		try {
 			await axios.put(`${urlApi}/registro_gastos/${id}`, dadosNovos)
 			return true
