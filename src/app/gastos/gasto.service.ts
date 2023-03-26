@@ -7,6 +7,8 @@ export type Gasto = {
 	data_gasto?: string,
 	data_registro?: string,
 	descricao?: string,
+	parcela_atual?: number,
+	parcelas_totais?: number,
 	valor?: number,
 	tipo?: number,
 	banco_id?: number
