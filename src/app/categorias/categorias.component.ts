@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import * as moment from 'moment';
 import { Banco, BancoService } from '../bancos';
-import { Formulario } from '../editar/editar.component';
+import { FormularioEditarGasto } from '../editar/editar.component';
 import { Gasto, GastoService } from '../gastos';
 import utils from '../utils';
 
@@ -27,7 +27,8 @@ export class CategoriasComponent implements OnInit {
 	constructor(
 		private gastosAPI: GastoService,
 		private route: ActivatedRoute,
-		private BancoService: BancoService) { }
+		private BancoService: BancoService
+	) { }
 
 	tipoCategoria: number = parseInt(this.route.snapshot.params['categoria'])
 	banco: Banco = {}
@@ -42,29 +43,10 @@ export class CategoriasComponent implements OnInit {
 		"animarEntrar-D-E",
 	]
 
-	gastos: Categorias = {
-		Geral: [],
-		Transporte: [],
-		Alimentacao: []
-	}
-
-	total: CategoriasTotal = {
-		Geral: "00,00",
-		Transporte: "00,00",
-		Alimentacao: "00,00",
-	}
-
+	gastos!: Categorias
+	total!: CategoriasTotal
 	dialogEditar: boolean = false
-	editarForm: Formulario = {
-		id: 0,
-		data: "",
-		descricao: "",
-		parcela_atual: 0,
-		parcelas_totais: 0,
-		valor: 0,
-		tipo: "",
-		banco: ""
-	}
+	editarForm!: FormularioEditarGasto
 
 	async ngOnInit() {
 		this.banco = await this.BancoService.pegarBancoPorId(parseInt(this.route.snapshot.params['banco']))

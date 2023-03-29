@@ -2,7 +2,7 @@ import { Component, Input, Output, EventEmitter, OnInit } from '@angular/core';
 import { Banco, BancoService } from '../bancos';
 import { GastoService } from '../gastos';
 
-type Formulario = {
+type FormularioAdicionarGasto = {
 	data: string,
 	descricao: string,
 	parcela_atual: number,
@@ -24,15 +24,7 @@ export class AdicionarComponent implements OnInit {
 	constructor(private BancoService: BancoService, private GastosService: GastoService) { }
 
 	bancos: Banco[] = []
-	formulario: Formulario = {
-		data: "",
-		descricao: "",
-		parcela_atual: 0,
-		parcelas_totais: 0,
-		valor: 0,
-		tipo: "",
-		banco: ""
-	}
+	formulario!: FormularioAdicionarGasto
 
 	ngOnInit() {
 		this.carregarBancos().catch((error) => {

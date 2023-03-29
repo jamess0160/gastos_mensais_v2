@@ -1,7 +1,7 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
-import { Banco, BancoService } from '../bancos';
+import { BancoService } from '../bancos';
 
-type Formulario = {
+type FormularioAdicionarBanco = {
 	nome: string,
 	icone: string,
 	posicao: number
@@ -18,12 +18,7 @@ export class AdicionarBancoComponent {
 
 	constructor(private BancoService: BancoService) { }
 
-	bancos: Banco[] = []
-	formulario: Formulario = {
-		nome: "",
-		icone: "",
-		posicao: 0
-	}
+	formulario!: FormularioAdicionarBanco
 
 	fecharDialog() {
 		this.dialogOpen = false
