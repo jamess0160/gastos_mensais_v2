@@ -60,7 +60,7 @@ export class BancoService {
 		}
 	}
 
-	async atualizarBanco(banco: Banco, id: number): Promise<boolean> {
+	async atualizarBanco(id: number, banco: Banco): Promise<boolean> {
 		try {
 			await axios.put(`${urlApi}/bancos/${id}`, banco)
 			return true
