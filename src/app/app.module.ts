@@ -14,6 +14,7 @@ import { AdicionarComponent } from './adicionar/adicionar.component';
 import { FormsModule } from '@angular/forms';
 import { AdicionarBancoComponent } from './adicionar-banco/adicionar-banco.component';
 import { EditarComponent } from './editar/editar.component';
+import { EditarBancoComponent } from './editar-banco/editar-banco.component';
 
 @NgModule({
   declarations: [
@@ -24,7 +25,8 @@ import { EditarComponent } from './editar/editar.component';
     CategoriasComponent,
     AdicionarComponent,
     AdicionarBancoComponent,
-    EditarComponent
+    EditarComponent,
+    EditarBancoComponent
   ],
   imports: [
     BrowserModule,
