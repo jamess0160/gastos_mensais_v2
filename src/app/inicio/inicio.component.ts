@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { BancoService, Tile } from '../bancos';
+import { Banco, BancoService, Tile } from '../bancos';
+import { FormularioEditarBanco } from '../editar-banco/editar-banco.component';
 import { EntradaService } from '../entradas';
 import utils from '../utils';
 
@@ -20,6 +21,9 @@ export class InicioComponent implements OnInit {
 
     dialogGasto = false
     dialogBanco = false
+    dialogEditarBanco = false
+
+    bancoSelecionado!: FormularioEditarBanco
 
     tiles: Tile[] = []
     totalGastos: string = ""
@@ -43,12 +47,17 @@ export class InicioComponent implements OnInit {
         this.dialogGasto = true
     }
 
-    abrirAdicionarBanco(){
+    abrirAdicionarBanco() {
         this.dialogBanco = true
     }
 
-    editarBanco(event: Event){
+    editarBanco(event: Event, banco: Banco) {
         event.preventDefault()
-        
+        this.dialogEditarBanco = true
+
+        if (banco.id) this.bancoSelecionado.id = banco.id
+        if (banco.nome) this.bancoSelecionado.nome = banco.nome
+        if (banco.icone) this.bancoSelecionado.icone = banco.icone
+        if (banco.posicao) this.bancoSelecionado.posicao = banco.posicao
     }
 }

@@ -25,7 +25,7 @@
 
     <div class="grupoTiles" *ngFor="let item of tiles">
         <a class="tiles" [href]="'/categorias/' + item.id + '/1'">
-            <div class="iconeBanco" (click)="editarBanco($event)" title="Editar Banco">
+            <div class="iconeBanco" (click)="editarBanco($event, item)" title="Editar Banco">
                 <img
                     [src]="item.icone ? '../../assets/iconesBancos/' + item.icone : '../../assets/iconesBancos/padrao.svg'">
                 {{item.nome}}
@@ -58,4 +58,7 @@
 
     <app-adicionar-banco [dialogOpen]="this.dialogBanco"
         (dialogOpenChange)="this.dialogBanco=$event"></app-adicionar-banco>
+
+    <app-editar-banco [dialogOpen]="this.dialogEditarBanco" [formulario]="this.bancoSelecionado"
+        (dialogOpenChange)="this.dialogEditarBanco=$event"></app-editar-banco>
 </div>
