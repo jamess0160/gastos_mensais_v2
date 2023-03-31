@@ -2,10 +2,17 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { BancoService } from '../bancos';
 
 export type FormularioEditarBanco = {
-	id: number
+	id: number,
 	nome: string,
 	icone: string,
 	posicao: number
+}
+
+const DEFAULT_FORM = {
+	id: 0,
+	nome: "",
+	icone: "",
+	posicao: 0
 }
 
 @Component({
@@ -15,15 +22,19 @@ export type FormularioEditarBanco = {
 })
 export class EditarBancoComponent {
 	@Input() dialogOpen: boolean = false
-	@Input() formulario!: FormularioEditarBanco
+	@Input() formulario: FormularioEditarBanco = { ...DEFAULT_FORM }
 
 	@Output() dialogOpenChange = new EventEmitter<boolean>()
+	@Output() formularioChange = new EventEmitter<FormularioEditarBanco>()
 
 	constructor(private BancoService: BancoService) { }
 
 	fecharDialog() {
 		this.dialogOpen = false
+		this.formulario = { ...DEFAULT_FORM }
+
 		this.dialogOpenChange.emit(this.dialogOpen)
+		this.formularioChange.emit(this.formulario)
 	}
 
 	async editarBanco() {
@@ -47,5 +58,21 @@ export class EditarBancoComponent {
 		if (!this.formulario.nome) return false
 
 		return true
+	}
+
+	async deletarBanco() {
+		let conf = confirm(`Você deseja mesmo deletar o banco ${this.formulario.nome}?`)
+
+		if (!conf) {
+			return
+		}
+
+		let sucesso = await this.BancoService.deletarBanco(this.formulario.id)
+
+		if (!sucesso) {
+			return
+		}
+		alert("Banco deletado com sucesso!")
+		this.fecharDialog()
 	}
 }

@@ -13,6 +13,17 @@ export type FormularioEditarGasto = {
 	banco: string
 }
 
+const DEFAULT_FORM = {
+	id: 0,
+	data: "",
+	descricao: "",
+	parcela_atual: 0,
+	parcelas_totais: 0,
+	valor: 0,
+	tipo: "",
+	banco: ""
+}
+
 @Component({
 	selector: 'app-editar',
 	templateUrl: './editar.component.html',
@@ -20,9 +31,10 @@ export type FormularioEditarGasto = {
 })
 export class EditarComponent implements OnInit {
 	@Input() dialogOpen: boolean = false
-	@Input() formulario!: FormularioEditarGasto
+	@Input() formulario: FormularioEditarGasto = { ...DEFAULT_FORM }
 
 	@Output() dialogOpenChange = new EventEmitter<boolean>()
+	@Output() formularioChange = new EventEmitter<FormularioEditarGasto>()
 
 	constructor(private BancoService: BancoService, private GastosService: GastoService) { }
 
@@ -41,6 +53,9 @@ export class EditarComponent implements OnInit {
 
 	fecharDialog() {
 		this.dialogOpen = false
+		this.formulario = { ...DEFAULT_FORM }
+
+		this.formularioChange.emit(this.formulario)
 		this.dialogOpenChange.emit(this.dialogOpen)
 	}
 

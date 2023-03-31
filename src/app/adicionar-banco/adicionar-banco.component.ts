@@ -3,8 +3,8 @@ import { BancoService } from '../bancos';
 
 type FormularioAdicionarBanco = {
 	nome: string,
-	icone: string,
-	posicao: number
+	icone?: string,
+	posicao?: number
 }
 
 @Component({
@@ -18,7 +18,9 @@ export class AdicionarBancoComponent {
 
 	constructor(private BancoService: BancoService) { }
 
-	formulario!: FormularioAdicionarBanco
+	formulario: FormularioAdicionarBanco = {
+		nome: ""
+	}
 
 	fecharDialog() {
 		this.dialogOpen = false
@@ -40,6 +42,11 @@ export class AdicionarBancoComponent {
 
 		alert("Banco inserido com sucesso!")
 		this.fecharDialog()
+
+		this.formulario = {
+			nome: ""
+		}
+
 	}
 
 	validarFormulario() {

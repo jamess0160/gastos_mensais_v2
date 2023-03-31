@@ -3,13 +3,20 @@ import { Banco, BancoService } from '../bancos';
 import { GastoService } from '../gastos';
 
 type FormularioAdicionarGasto = {
-	data: string,
+	data?: string,
 	descricao: string,
-	parcela_atual: number,
-	parcelas_totais: number,
+	parcela_atual?: number,
+	parcelas_totais?: number,
 	valor: number,
 	tipo: string,
 	banco: string
+}
+
+const DEFAULT_FORM = {
+	descricao: "",
+	valor: 0,
+	tipo: "",
+	banco: ""
 }
 
 @Component({
@@ -24,13 +31,10 @@ export class AdicionarComponent implements OnInit {
 	constructor(private BancoService: BancoService, private GastosService: GastoService) { }
 
 	bancos: Banco[] = []
-	formulario!: FormularioAdicionarGasto
+	formulario: FormularioAdicionarGasto = { ...DEFAULT_FORM }
 
 	ngOnInit() {
-		this.carregarBancos().catch((error) => {
-			alert(error.toString())
-			console.error(error)
-		})
+		this.carregarBancos()
 	}
 
 	async carregarBancos() {
@@ -61,6 +65,7 @@ export class AdicionarComponent implements OnInit {
 
 		alert("Gasto inserido com sucesso!")
 		this.fecharDialog()
+		this.formulario = { ...DEFAULT_FORM }
 	}
 
 	validarFormulario() {
