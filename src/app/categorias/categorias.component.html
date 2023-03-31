@@ -16,7 +16,8 @@
                     <div>{{item.descricao}}</div>
                     <div>{{item.valor ? 'R$' + item.valor: ''}}</div>
                     <div [style]="item.descricao ? '' : 'display: none'">
-                        <img style="margin-right: 1rem;" src="../../assets/edit.png" alt="Adicionar" title="Adicionar">
+                        <img style="margin-right: 1rem;" src="../../assets/edit.png" alt="Editar" title="Editar"
+                            (click)="editar(item)">
                         <img src="../../assets/delete.png" alt="Deletar" title="Deletar"
                             (click)="confirmarDelete(item.id)">
                     </div>
@@ -41,7 +42,8 @@
                     <div>{{item.descricao}}</div>
                     <div>{{item.valor ? 'R$' + item.valor: ''}}</div>
                     <div [style]="item.descricao ? '' : 'display: none'">
-                        <img style="margin-right: 1rem;" src="../../assets/edit.png" alt="Adicionar" title="Adicionar">
+                        <img style="margin-right: 1rem;" src="../../assets/edit.png" alt="Editar" title="Editar"
+                            (click)="editar(item)">
                         <img src="../../assets/delete.png" alt="Deletar" title="Deletar"
                             (click)="confirmarDelete(item.id)">
                     </div>
@@ -86,6 +88,6 @@
             (click)="mudarPagina(1)">
     </div>
 
-    <app-editar [dialogOpen]="dialogEditar" [formulario]="editarForm"
-        (dialogOpenChange)="dialogEditar = $event"></app-editar>
+    <app-editar [dialogOpen]="dialogEditar" [formulario]="editarForm" (dialogOpenChange)="dialogEditar = $event"
+        (formularioChange)="editarForm = $event"></app-editar>
 </section>
