@@ -13,9 +13,9 @@ export type Entrada = {
 })
 export class EntradaService {
 
-	async listarEntradasMes(mes: number = new Date().getMonth() + 1): Promise<Entrada[]> {
+	async listarEntradas(): Promise<Entrada[]> {
 		try {
-			let { data } = await axios.get(`${urlApi}/entradas/${mes}`)
+			let { data } = await axios.get(`${urlApi}/entradas/recentes`)
 			return data
 		} catch (error) {
 			alert("Ocorreu um erro ao buscar as entradas")
