@@ -54,11 +54,10 @@
 
     <img class="add" src="../../assets/add.png" title="Adicionar" alt="Adicionar" (click)="abrirAdicionar()">
 
-    <app-adicionar [dialogOpen]="this.dialogGasto" (dialogOpenChange)="this.dialogGasto=$event"></app-adicionar>
+    <app-adicionar [dialogOpen]="dialogGasto" (dialogOpenChange)="dialogGasto=$event"></app-adicionar>
 
-    <app-adicionar-banco [dialogOpen]="this.dialogBanco"
-        (dialogOpenChange)="this.dialogBanco=$event"></app-adicionar-banco>
+    <app-adicionar-banco [dialogOpen]="dialogBanco" (dialogOpenChange)="dialogBanco=$event"></app-adicionar-banco>
 
-    <app-editar-banco [dialogOpen]="this.dialogEditarBanco" [formulario]="this.bancoSelecionado"
-        (dialogOpenChange)="this.dialogEditarBanco=$event"></app-editar-banco>
+    <app-editar-banco [dialogOpen]="dialogEditarBanco" [formulario]="bancoSelecionado"
+        (dialogOpenChange)="dialogEditarBanco=$event" (formularioChange)="bancoSelecionado = $event"></app-editar-banco>
 </div>
