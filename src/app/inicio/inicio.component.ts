@@ -23,7 +23,12 @@ export class InicioComponent implements OnInit {
     dialogBanco = false
     dialogEditarBanco = false
 
-    bancoSelecionado!: FormularioEditarBanco
+    bancoSelecionado: FormularioEditarBanco = {
+        id: 0,
+        nome: "",
+        icone: "",
+        posicao: 0
+    }
 
     tiles: Tile[] = []
     totalGastos: string = ""
@@ -36,7 +41,7 @@ export class InicioComponent implements OnInit {
 
     async carregarDados() {
         this.tiles = await this.BancoService.listarGastoPorBancos()
-        let entradas = await this.EntradaService.listarEntradasMes()
+        let entradas = await this.EntradaService.listarEntradas()
 
         this.totalGastos = this.tiles.reduce((anterior, atual) => anterior + parseInt(atual.total), 0).toFixed(2)
         this.totalEntradas = entradas.reduce((anterior, atual) => anterior + atual.valor, 0).toFixed(2)

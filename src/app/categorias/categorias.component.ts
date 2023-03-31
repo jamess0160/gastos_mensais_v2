@@ -43,10 +43,29 @@ export class CategoriasComponent implements OnInit {
 		"animarEntrar-D-E",
 	]
 
-	gastos!: Categorias
-	total!: CategoriasTotal
+	gastos: Categorias = {
+		Geral: [],
+		Transporte: [],
+		Alimentacao: []
+	}
+
+	total: CategoriasTotal = {
+		Geral: "00,00",
+		Transporte: "00,00",
+		Alimentacao: "00,00",
+	}
+
 	dialogEditar: boolean = false
-	editarForm!: FormularioEditarGasto
+	editarForm: FormularioEditarGasto = {
+		id: 0,
+		data: "",
+		descricao: "",
+		parcela_atual: 0,
+		parcelas_totais: 0,
+		valor: 0,
+		tipo: "",
+		banco: ""
+	}
 
 	async ngOnInit() {
 		this.banco = await this.BancoService.pegarBancoPorId(parseInt(this.route.snapshot.params['banco']))
@@ -91,9 +110,9 @@ export class CategoriasComponent implements OnInit {
 	}
 
 	tratarCategoriasTotal(dados: Gasto[]): CategoriasTotal {
-		let dadosGeral = dados.filter((item) => item.tipo === 1)
-		let dadosTransporte = dados.filter((item) => item.tipo === 2)
-		let dadosAlimentacao = dados.filter((item) => item.tipo === 3)
+		let dadosGeral = dados.filter((item) => item.tipo === 1 && !item.descricao?.includes("*"))
+		let dadosTransporte = dados.filter((item) => item.tipo === 2 && !item.descricao?.includes("*"))
+		let dadosAlimentacao = dados.filter((item) => item.tipo === 3 && !item.descricao?.includes("*"))
 
 		return {
 			Geral: dadosGeral.reduce((anterior, atual) => anterior + (atual.valor || 0), 0).toFixed(2),
@@ -165,5 +184,7 @@ export class CategoriasComponent implements OnInit {
 		if (itemEditar.tipo) this.editarForm.tipo = itemEditar.tipo.toString()
 		if (itemEditar.valor) this.editarForm.valor = itemEditar.valor
 		if (itemEditar.id) this.editarForm.id = itemEditar.id
+
+		console.log(this.editarForm)
 	}
 }
