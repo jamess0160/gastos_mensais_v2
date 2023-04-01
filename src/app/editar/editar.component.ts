@@ -4,10 +4,10 @@ import { GastoService } from '../gastos';
 
 export type FormularioEditarGasto = {
 	id: number
-	data: string,
+	data?: string,
 	descricao: string,
-	parcela_atual: number,
-	parcelas_totais: number,
+	parcela_atual?: number,
+	parcelas_totais?: number,
 	valor: number,
 	tipo: string,
 	banco: string
@@ -15,10 +15,7 @@ export type FormularioEditarGasto = {
 
 const DEFAULT_FORM = {
 	id: 0,
-	data: "",
 	descricao: "",
-	parcela_atual: 0,
-	parcelas_totais: 0,
 	valor: 0,
 	tipo: "",
 	banco: ""
@@ -65,11 +62,11 @@ export class EditarComponent implements OnInit {
 			return
 		}
 		let sucesso = await this.GastosService.atualizarGasto(this.formulario.id, {
-			data_gasto: this.formulario.data,
+			data_gasto: this.formulario.data || null,
 			banco_id: parseInt(this.formulario.banco),
 			descricao: this.formulario.descricao,
-			parcela_atual: this.formulario.parcela_atual,
-			parcelas_totais: this.formulario.parcelas_totais,
+			parcela_atual: this.formulario.parcela_atual || null,
+			parcelas_totais: this.formulario.parcelas_totais || null,
 			valor: this.formulario.valor,
 			tipo: parseInt(this.formulario.tipo)
 		})

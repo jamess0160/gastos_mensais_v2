@@ -4,14 +4,14 @@ import { urlApi } from 'src/app/constants';
 
 export type Gasto = {
 	id?: number,
-	data_gasto?: string,
-	data_registro?: string,
-	descricao?: string,
-	parcela_atual?: number,
-	parcelas_totais?: number,
-	valor?: number,
-	tipo?: number,
-	banco_id?: number
+	data_gasto?: string | null,
+	data_registro?: string | null,
+	descricao?: string | null,
+	parcela_atual?: number | null,
+	parcelas_totais?: number | null,
+	valor?: number | null,
+	tipo?: number | null,
+	banco_id?: number | null
 }
 
 @Injectable({
