@@ -1,1 +1,1 @@
-export const urlApi: string = "http://localhost:3001"
+export const urlApi: string = "http://192.168.100.4:3001"
