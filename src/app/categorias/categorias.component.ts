@@ -187,4 +187,22 @@ export class CategoriasComponent implements OnInit {
 
 		console.log(this.editarForm)
 	}
+
+	tratarData(item: Gasto) {
+		if (!item.id) {
+			return ""
+		}
+		
+		if (item.parcela_atual) {
+			let atual = ('00' + item.parcela_atual).slice(-2)
+			let maximo = ('00' + item.parcelas_totais).slice(-2)
+			return `(${atual}/${maximo})`
+		}
+
+		if (!item.data_gasto) {
+			return "Fixo"
+		}
+
+		return item.data_gasto
+	}
 }
