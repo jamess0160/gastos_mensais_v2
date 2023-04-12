@@ -67,6 +67,9 @@ export class CategoriasComponent implements OnInit {
 		banco: ""
 	}
 
+	resolveDelete: any
+	dialogDelete = false
+
 	async ngOnInit() {
 		this.banco = await this.BancoService.pegarBancoPorId(parseInt(this.route.snapshot.params['banco']))
 
@@ -125,7 +128,11 @@ export class CategoriasComponent implements OnInit {
 		if (!id) {
 			return
 		}
-		if (!confirm("Você deseja mesmo deletar esse registro?")) {
+		this.dialogDelete = true
+		let confirmDelete = await new Promise((resolve) => this.resolveDelete = resolve)
+		this.dialogDelete = false
+
+		if (!confirmDelete) {
 			return
 		}
 
@@ -190,7 +197,7 @@ export class CategoriasComponent implements OnInit {
 		if (!item.id) {
 			return ""
 		}
-		
+
 		if (item.parcela_atual) {
 			let atual = ('00' + item.parcela_atual).slice(-2)
 			let maximo = ('00' + item.parcelas_totais).slice(-2)

@@ -89,3 +89,13 @@
     <app-editar [dialogOpen]="dialogEditar" [formulario]="editarForm" (dialogOpenChange)="dialogEditar = $event"
         (formularioChange)="editarForm = $event"></app-editar>
 </section>
+
+<div *ngIf="dialogDelete" class="containerMensagem">
+    <div class="mensagemDelete">
+        <h1 class="texto">Você deseja mesmo deletar esse registro?</h1>
+        <div class="botoes">
+            <button class="cancelar" (click)="resolveDelete(false)">Cancelar</button>
+            <button class="confirmar" (click)="resolveDelete(true)">Sim</button>
+        </div>
+    </div>
+</div>
