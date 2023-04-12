@@ -1,6 +1,7 @@
 import { Component, Input, Output, EventEmitter, OnInit } from '@angular/core';
 import { Banco, BancoService } from '../bancos';
 import { GastoService } from '../gastos';
+import utils from '../utils';
 
 type FormularioAdicionarGasto = {
 	data?: string,
@@ -32,6 +33,9 @@ export class AdicionarComponent implements OnInit {
 
 	bancos: Banco[] = []
 	formulario: FormularioAdicionarGasto = { ...DEFAULT_FORM }
+	classesDialog = ['dialog']
+	erroFormulario = false
+	campoObrigatorio!: any
 
 	ngOnInit() {
 		this.carregarBancos()
@@ -48,7 +52,7 @@ export class AdicionarComponent implements OnInit {
 
 	async registrarGasto() {
 		if (!this.validarFormulario()) {
-			alert("Preencha todos os campos para continuar")
+			this.erroForm()
 			return
 		}
 		let sucesso = await this.GastosService.inserirGasto({
@@ -61,11 +65,12 @@ export class AdicionarComponent implements OnInit {
 			tipo: parseInt(this.formulario.tipo)
 		})
 
-		if (!sucesso) return
+		if (!sucesso) {
+			this.erro()
+			return
+		}
 
-		alert("Gasto inserido com sucesso!")
-		this.fecharDialog()
-		this.formulario = { ...DEFAULT_FORM }
+		this.sucesso()
 	}
 
 	validarFormulario() {
@@ -74,6 +79,29 @@ export class AdicionarComponent implements OnInit {
 		if (!this.formulario.valor) return false
 		if (!this.formulario.tipo) return false
 
+		this.erroFormulario = false
 		return true
+	}
+
+	async erro() {
+		this.classesDialog[1] = 'animarErro'
+		await utils.sleep(1000)
+		this.classesDialog[1] = 'erroEstatico'
+	}
+
+	async erroForm() {
+		this.classesDialog[1] = 'animarErro'
+		this.erroFormulario = true
+		this.campoObrigatorio = { borderColor: "red" }
+		await utils.sleep(1000)
+		this.classesDialog[1] = 'erroEstatico'
+	}
+
+	async sucesso() {
+		this.campoObrigatorio = null
+		this.classesDialog[1] = 'animarSucesso'
+		await utils.sleep(1000)
+		this.classesDialog[1] = ''
+		this.formulario = { ...DEFAULT_FORM }
 	}
 }

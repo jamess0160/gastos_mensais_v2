@@ -184,8 +184,6 @@ export class CategoriasComponent implements OnInit {
 		if (itemEditar.tipo) this.editarForm.tipo = itemEditar.tipo.toString()
 		if (itemEditar.valor) this.editarForm.valor = itemEditar.valor
 		if (itemEditar.id) this.editarForm.id = itemEditar.id
-
-		console.log(this.editarForm)
 	}
 
 	tratarData(item: Gasto) {

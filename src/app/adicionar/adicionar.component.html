@@ -1,11 +1,11 @@
 <div class="container" *ngIf="this.dialogOpen">
-    <div class="dialog">
+    <div [ngClass]="classesDialog">
         <h1>Novo Gasto</h1>
         <div class="campo">
             <legend>Data</legend>
             <input [(ngModel)]="formulario.data" type="date">
         </div>
-        <div class="campo">
+        <div class="campo" [ngStyle]="this.campoObrigatorio">
             <legend>Descrição</legend>
             <input [(ngModel)]="formulario.descricao" type="text">
         </div>
@@ -17,11 +17,11 @@
             <legend>Parcelas totais</legend>
             <input [(ngModel)]="formulario.parcelas_totais" type="number">
         </div>
-        <div class="campo">
+        <div class="campo" [ngStyle]="this.campoObrigatorio">
             <legend>Valor</legend>
             <input [(ngModel)]="formulario.valor" type="number">
         </div>
-        <div class="campo">
+        <div class="campo" [ngStyle]="this.campoObrigatorio">
             <legend>Tipo de gasto</legend>
             <select [(ngModel)]="formulario.tipo">
                 <option value="0" selected disabled>Selecione um gasto</option>
@@ -30,7 +30,7 @@
                 <option value="3">Alimentação</option>
             </select>
         </div>
-        <div class="campo">
+        <div class="campo" [ngStyle]="this.campoObrigatorio">
             <legend>Banco</legend>
             <select [(ngModel)]="formulario.banco">
                 <option value="0" selected disabled>Selecione um banco</option>
@@ -39,8 +39,13 @@
         </div>
 
         <div class="botoes">
-            <button class="cancelar" (click)="fecharDialog()">Cancelar</button>
+            <button class="cancelar" (click)="fecharDialog()">Fechar</button>
             <button class="cadastrar" (click)="registrarGasto()">Cadastrar</button>
         </div>
+
+        <div *ngIf="classesDialog[1] === 'animarSucesso'" class="avisoSucesso">Gasto inserido com sucesso!</div>
+        <div *ngIf="classesDialog[1] === 'animarErro' && !erroFormulario" class="avisoErro">Ocorreu um erro ao inserir o
+            gasto!</div>
+        <div *ngIf="erroFormulario" class="avisoErro">Preencha os campos obrigatórios para continuar</div>
     </div>
 </div>

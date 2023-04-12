@@ -11,6 +11,7 @@
     font-family: "inter";
 
     .dialog {
+        position: relative;
         width: 30rem;
         height: 30rem;
         background-color: #1E1F22;
@@ -23,6 +24,81 @@
         justify-content: space-between;
         padding: 1.5rem 0 1.5rem 0;
     }
+}
+
+.animarErro,
+.animarSucesso {
+
+    &::before,
+    &::after {
+        content: "";
+        position: absolute;
+        width: 0px;
+        height: 0px;
+        animation: sucesso 500ms forwards;
+        border-radius: 15px;
+    }
+
+    &::before {
+        top: 0;
+        left: 0;
+    }
+
+    &::after {
+        right: 0;
+        bottom: 0;
+    }
+
+    @keyframes sucesso {
+        100% {
+            width: calc(100% - 2px);
+            height: calc(100% - 2px);
+        }
+    }
+}
+
+.animarErro {
+    &::before {
+        border-top: 1px solid #FF122F;
+        border-left: 1px solid #FF122F;
+    }
+
+    &::after {
+        border-bottom: 1px solid #FF122F;
+        border-right: 1px solid #FF122F;
+    }
+}
+
+.avisoErro {
+    position: absolute;
+    top: -3rem;
+    color: #FF122F;
+}
+
+.erroEstatico {
+    border: 1px solid #FF122F;
+}
+
+.animarSucesso {
+    &::before {
+        border-top: 1px solid #26FF8A;
+        border-left: 1px solid #26FF8A;
+    }
+
+    &::after {
+        border-bottom: 1px solid #26FF8A;
+        border-right: 1px solid #26FF8A;
+    }
+}
+
+.avisoSucesso {
+    position: absolute;
+    top: -3rem;
+    color: #26FF8A;
+}
+
+.sucessoEstatico {
+    border: 1px solid #26FF8A;
 }
 
 .campo {

@@ -1,5 +1,5 @@
-export default {
-    callInterval(funcao: (...params: any[]) => Promise<void>, tempo: number, mensagemErro: string, This: any, ...params: any[]) {
+export default class Utils {
+    static callInterval(funcao: (...params: any[]) => Promise<void>, tempo: number, mensagemErro: string, This: any, ...params: any[]) {
 
         let intervalo = setInterval(() => {
             funcao.call(This, ...params).catch(tratarErro)
@@ -14,9 +14,9 @@ export default {
             clearInterval(intervalo)
             console.error(error)
         }
-    },
+    }
 
-    sleep(tempo: number) {
+    static sleep(tempo: number) {
         return new Promise(resolve => {
             setTimeout(resolve, tempo)
         })

@@ -11,7 +11,10 @@ import utils from '../utils';
 })
 export class InicioComponent implements OnInit {
 
-    constructor(private BancoService: BancoService, private EntradaService: EntradaService) { }
+    constructor(
+        private BancoService: BancoService,
+        private EntradaService: EntradaService
+    ) { }
 
     meses: string[] = ["Janeiro", "Fevereiro", "Março", "Abril", "Maio", "Junho", "Julho", "Agosto", "Setembro", "Outubro", "Novembro", "Dezembro"]
 
