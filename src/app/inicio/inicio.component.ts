@@ -43,8 +43,11 @@ export class InicioComponent implements OnInit {
     }
 
     async carregarDados() {
-        this.tiles = await this.BancoService.listarGastoPorBancos()
-        let entradas = await this.EntradaService.listarEntradas()
+        let localMes = localStorage.getItem("mes")
+        let mes = localMes ? parseInt(localMes) : undefined
+
+        this.tiles = await this.BancoService.listarGastoPorBancos(mes)
+        let entradas = await this.EntradaService.listarEntradas(mes)
 
         this.totalGastos = this.tiles.reduce((anterior, atual) => anterior + parseInt(atual.total), 0).toFixed(2)
         this.totalEntradas = entradas.reduce((anterior, atual) => anterior + atual.valor, 0).toFixed(2)
