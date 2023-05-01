@@ -17,10 +17,11 @@ export class InicioComponent implements OnInit {
     ) { }
 
     meses: string[] = ["Janeiro", "Fevereiro", "Março", "Abril", "Maio", "Junho", "Julho", "Agosto", "Setembro", "Outubro", "Novembro", "Dezembro"]
+    localMes = localStorage.getItem("mes")
 
     diaAtual: number = new Date().getDate()
-    mesAtual: string = this.meses[new Date().getMonth()]
-    anoAtual: number = new Date().getFullYear()
+    mesAtual: string = this.meses[this.localMes ? parseInt(this.localMes) - 1 : new Date().getMonth()]
+    anoAtual: string | number = localStorage.getItem("ano") || new Date().getFullYear()
 
     dialogGasto = false
     dialogBanco = false
@@ -73,5 +74,11 @@ export class InicioComponent implements OnInit {
         if (banco.nome) this.bancoSelecionado.nome = banco.nome
         if (banco.icone) this.bancoSelecionado.icone = banco.icone
         if (banco.posicao) this.bancoSelecionado.posicao = banco.posicao
+    }
+
+    validarMes() {
+        if (!this.localMes) return true
+        
+        return this.localMes == (new Date().getMonth() + 1).toString()
     }
 }

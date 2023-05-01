@@ -20,7 +20,7 @@
 
     <div class="data">
         <div class="mes-ano">{{mesAtual}}, {{anoAtual}}</div>
-        <div class="dia">dia {{diaAtual}}</div>
+        <div *ngIf="validarMes()" class="dia">dia {{diaAtual}}</div>
     </div>
 
     <div class="grupoTiles" *ngFor="let item of tiles">
