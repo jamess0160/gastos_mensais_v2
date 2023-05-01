@@ -23,8 +23,8 @@ export type Tile = Banco & {
 })
 export class BancoService {
 
-	async listarGastoPorBancos(): Promise<Tile[]> {
-		let { data } = await axios.get(`${urlApi}/bancos/gastosPorBanco`)
+	async listarGastoPorBancos(mes: number = new Date().getMonth() + 1): Promise<Tile[]> {
+		let { data } = await axios.get(urlApi + '/bancos/gastosPorBanco/mes=' + mes)
 		return data
 	}
 
