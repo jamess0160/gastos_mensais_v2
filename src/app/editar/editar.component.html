@@ -43,7 +43,7 @@
             <button class="editar" (click)="editarGasto()">Editar</button>
         </div>
 
-        <div *ngIf="classesDialog[1] === 'animarSucesso'" class="avisoSucesso">Gasto inserido com sucesso!</div>
+        <div *ngIf="classesDialog[1] === 'animarSucesso'" class="avisoSucesso">Gasto editado com sucesso!</div>
         <div *ngIf="classesDialog[1] === 'animarErro' && !erroFormulario" class="avisoErro">Ocorreu um erro ao inserir o
             gasto!</div>
         <div *ngIf="erroFormulario" class="avisoErro">Preencha os campos obrigatórios para continuar</div>
