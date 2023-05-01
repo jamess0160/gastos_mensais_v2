@@ -21,9 +21,9 @@ export class GastoService {
 
 	constructor() { }
 
-	async listarGastos(banco: number, tipo: number, mes: number = new Date().getMonth() + 1): Promise<Gasto[]> {
+	async listarGastos(banco: number, tipo: number, mes: number = new Date().getMonth() + 1, ano: number = new Date().getFullYear()): Promise<Gasto[]> {
 		try {
-			let { data }: { data: Gasto[] } = await axios.get(`${urlApi}/registro_gastos/${banco}/${tipo}/${mes}`)
+			let { data }: { data: Gasto[] } = await axios.get(`${urlApi}/registro_gastos/${banco}/${tipo}/${mes}/${ano}`)
 			data.forEach((item) => {
 				item.data_gasto = item.data_gasto ? new Date(item.data_gasto).toLocaleDateString('pt-br') : ""
 				if (item.descricao) {

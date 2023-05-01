@@ -80,7 +80,12 @@ export class CategoriasComponent implements OnInit {
 		if (!this.banco.id) {
 			return
 		}
-		let dados = await this.gastosAPI.listarGastos(this.banco.id, this.tipoCategoria)
+		let localMes = localStorage.getItem("mes")
+		let localAno = localStorage.getItem("ano")
+
+		let mes = localMes ? parseInt(localMes) : undefined
+		let ano = localAno ? parseInt(localAno) : undefined
+		let dados = await this.gastosAPI.listarGastos(this.banco.id, this.tipoCategoria, mes, ano)
 
 		this.gastos = this.tratarCategorias(dados)
 		this.total = this.tratarCategoriasTotal(dados)
