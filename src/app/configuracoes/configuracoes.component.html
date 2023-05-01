@@ -1,4 +1,30 @@
 <section>
     <app-voltar></app-voltar>
-    <div class="container"></div>
+    <div class="container">
+        <div class="botoes">
+            <div class="titulo">Configuração geral</div>
+            <button (click)="novoMes()">Começar novo mês</button>
+            <!-- <button>Adicionar Entrada</button> -->
+        </div>
+        <div class="mesAno">
+            <div class="titulo">Configuração de data</div>
+            <select [(ngModel)]="mes">
+                <option value="0" disabled selected>Escolha um mês</option>
+                <option value="1">Janeiro</option>
+                <option value="2">Fevereiro</option>
+                <option value="3">Março</option>
+                <option value="4">Abril</option>
+                <option value="5">Maio</option>
+                <option value="6">Junho</option>
+                <option value="7">Julho</option>
+                <option value="8">Agosto</option>
+                <option value="9">Setembro</option>
+                <option value="10">Outubro</option>
+                <option value="11">Novembro</option>
+                <option value="12">Dezembro</option>
+            </select>
+            <input [(ngModel)]="ano" type="number" placeholder="Ano">
+            <button (click)="salvarData()">Salvar</button>
+        </div>
+    </div>
 </section>
