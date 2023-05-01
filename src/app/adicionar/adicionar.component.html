@@ -2,7 +2,11 @@
     <div [ngClass]="classesDialog">
         <h1>Novo Gasto</h1>
         <div class="campo">
-            <legend>Data</legend>
+            <legend>Data de Registro</legend>
+            <input [(ngModel)]="formulario.data_registro" type="date">
+        </div>
+        <div class="campo">
+            <legend>Data do Gasto</legend>
             <input [(ngModel)]="formulario.data" type="date">
         </div>
         <div class="campo" [ngStyle]="this.campoObrigatorio">
