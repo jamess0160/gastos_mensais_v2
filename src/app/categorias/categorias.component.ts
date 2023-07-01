@@ -58,6 +58,7 @@ export class CategoriasComponent implements OnInit {
 	dialogEditar: boolean = false
 	editarForm: FormularioEditarGasto = {
 		id: 0,
+		data_registro: "",
 		data: "",
 		descricao: "",
 		parcela_atual: 0,
@@ -118,9 +119,9 @@ export class CategoriasComponent implements OnInit {
 	}
 
 	tratarCategoriasTotal(dados: Gasto[]): CategoriasTotal {
-		let dadosGeral = dados.filter((item) => item.tipo === 1 && !item.descricao?.includes("*"))
-		let dadosTransporte = dados.filter((item) => item.tipo === 2 && !item.descricao?.includes("*"))
-		let dadosAlimentacao = dados.filter((item) => item.tipo === 3 && !item.descricao?.includes("*"))
+		let dadosGeral = dados.filter((item) => item.tipo === 1 && item.active === 1)
+		let dadosTransporte = dados.filter((item) => item.tipo === 2 && item.active === 1)
+		let dadosAlimentacao = dados.filter((item) => item.tipo === 3 && item.active === 1)
 
 		return {
 			Geral: dadosGeral.reduce((anterior, atual) => anterior + (atual.valor || 0), 0).toFixed(2),
@@ -195,6 +196,7 @@ export class CategoriasComponent implements OnInit {
 		if (itemEditar.parcelas_totais) this.editarForm.parcelas_totais = itemEditar.parcelas_totais
 		if (itemEditar.tipo) this.editarForm.tipo = itemEditar.tipo.toString()
 		if (itemEditar.valor) this.editarForm.valor = itemEditar.valor
+		if (itemEditar.data_registro) this.editarForm.data_registro = moment(itemEditar.data_registro).format('YYYY-MM-DD')
 		if (itemEditar.id) this.editarForm.id = itemEditar.id
 	}
 
@@ -214,5 +216,13 @@ export class CategoriasComponent implements OnInit {
 		}
 
 		return item.data_gasto
+	}
+
+	async changeActive(item: Gasto) {
+		if (!item.id) {
+			return
+		}
+		await this.gastosAPI.inativarGasto(item.id, !item.active)
+		this.atualizarTabela()
 	}
 }

@@ -12,6 +12,7 @@ export type Gasto = {
 	valor?: number | null,
 	tipo?: number | null,
 	banco_id?: number | null
+	active?: 1 | 0
 }
 
 @Injectable({
@@ -69,6 +70,15 @@ export class GastoService {
 			console.error(error)
 			alert("Aconteceu um erro ao deletar")
 			return false
+		}
+	}
+
+	async inativarGasto(id: number, active: boolean): Promise<void> {
+		try {
+			await axios.put(`${urlApi}/registro_gastos/active=${active}/${id}`)
+		} catch (error) {
+			console.error(error)
+			alert("Aconteceu um erro ao inativar")
 		}
 	}
 }

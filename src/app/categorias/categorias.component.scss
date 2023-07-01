@@ -62,11 +62,15 @@ table {
             align-items: center;
 
             div {
-                width: 30%;
+                overflow: hidden;
+                white-space: nowrap;
+                text-overflow: ellipsis;
             }
 
             div:last-child {
                 width: auto;
+                display: flex;
+                justify-content: end;
             }
 
             img {
