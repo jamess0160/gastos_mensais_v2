@@ -6,7 +6,8 @@
     <div class="totais">
         <div style="background-color: #1E1F22">
             <div class="title">Total de gastos</div>
-            <div class="body">R$ {{totalGastos}}</div>
+            <div class="body" [title]="'Total de gastos com inativos = R$' + totalGastosInativos">R$ {{totalGastos}}
+            </div>
         </div>
         <div style="background-color: #554C55">
             <div class="title">Total de ganhos</div>
@@ -15,6 +16,10 @@
         <div style="background-color: #315663">
             <div class="title" style="color: #D2D2D2;">Restante</div>
             <div class="body">R$ {{restante}}</div>
+        </div>
+        <div style="background-color: #315663">
+            <div class="title" style="color: #D2D2D2;">Restante com inativos</div>
+            <div class="body">R$ {{restanteInativos}}</div>
         </div>
     </div>
 
@@ -44,6 +49,10 @@
         <div class="tiles">
             <div class="title">Total de gastos</div>
             <div class="total">R${{item.total}}</div>
+        </div>
+        <div class="tiles">
+            <div class="title">Total com Inativos</div>
+            <div class="total">R${{item.totalInativos}}</div>
         </div>
     </div>
 

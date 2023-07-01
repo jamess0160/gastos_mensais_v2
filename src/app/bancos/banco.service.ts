@@ -16,6 +16,7 @@ export type Tile = Banco & {
 		geral: string
 	},
 	total: string
+	totalInativos: string
 }
 
 @Injectable({
