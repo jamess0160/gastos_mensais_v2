@@ -12,8 +12,8 @@
         <table>
             <tr *ngFor="let item of gastos.Geral">
                 <td>
-                    <div style="width: 10%;">{{tratarData(item)}}</div>
-                    <div style="width: 30%;">{{item.descricao}}</div>
+                    <div>{{tratarData(item)}}</div>
+                    <div>{{item.descricao}}</div>
                     <div>{{item.valor ? 'R$' + item.valor: ''}}</div>
                     <div [style]="item.descricao ? '' : 'display: none'">
                         <input style="margin-right: 1rem;" type="checkbox" [checked]="item.active"
@@ -41,8 +41,8 @@
         <table>
             <tr *ngFor="let item of gastos.Transporte">
                 <td>
-                    <div style="width: 10%;">{{tratarData(item)}}</div>
-                    <div style="width: 30%;">{{item.descricao}}</div>
+                    <div>{{tratarData(item)}}</div>
+                    <div>{{item.descricao}}</div>
                     <div>{{item.valor ? 'R$' + item.valor: ''}}</div>
                     <div [style]="item.descricao ? '' : 'display: none'">
                         <input style="margin-right: 1rem;" type="checkbox" [checked]="item.active"
@@ -70,8 +70,8 @@
         <table>
             <tr *ngFor="let item of gastos.Alimentacao">
                 <td>
-                    <div style="width: 10%;">{{tratarData(item)}}</div>
-                    <div style="width: 30%;">{{item.descricao}}</div>
+                    <div>{{tratarData(item)}}</div>
+                    <div>{{item.descricao}}</div>
                     <div>{{item.valor ? 'R$' + item.valor: ''}}</div>
                     <div [style]="item.descricao ? '' : 'display: none'">
                         <input style="margin-right: 1rem;" type="checkbox" [checked]="item.active"
