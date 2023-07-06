@@ -39,7 +39,7 @@ export class InicioComponent implements OnInit {
     totalGastosInativos: string = ""
     totalEntradas: string = ""
     restante: string = ""
-    restanteInativos: string = "" 
+    restanteInativos: string = ""
 
     ngOnInit() {
         utils.callInterval(this.carregarDados, 2000, "Ocorreu um erro ao carregar os dados", this)
@@ -55,13 +55,13 @@ export class InicioComponent implements OnInit {
         this.tiles = await this.BancoService.listarGastoPorBancos(mes, ano)
         let entradas = await this.EntradaService.listarEntradas(mes, ano)
 
-        this.totalGastosInativos = this.tiles.reduce((anterior, atual) => anterior + parseInt(atual.totalInativos), 0).toFixed(2)
-        this.totalGastos = this.tiles.reduce((anterior, atual) => anterior + parseInt(atual.total), 0).toFixed(2)
+        this.totalGastosInativos = this.tiles.reduce((anterior, atual) => anterior + parseFloat(atual.totalInativos), 0).toFixed(2)
+        this.totalGastos = this.tiles.reduce((anterior, atual) => anterior + parseFloat(atual.total), 0).toFixed(2)
 
         this.totalEntradas = entradas.reduce((anterior, atual) => anterior + atual.valor, 0).toFixed(2)
-        
-        this.restante = (parseInt(this.totalEntradas) - parseInt(this.totalGastos)).toFixed(2)
-        this.restanteInativos = (parseInt(this.totalEntradas) - parseInt(this.totalGastosInativos)).toFixed(2)
+
+        this.restante = (parseFloat(this.totalEntradas) - parseFloat(this.totalGastos)).toFixed(2)
+        this.restanteInativos = (parseFloat(this.totalEntradas) - parseFloat(this.totalGastosInativos)).toFixed(2)
     }
 
     abrirAdicionar() {
@@ -84,7 +84,7 @@ export class InicioComponent implements OnInit {
 
     validarMes() {
         if (!this.localMes) return true
-        
+
         return this.localMes == (new Date().getMonth() + 1).toString()
     }
 }
