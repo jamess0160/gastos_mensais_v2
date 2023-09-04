@@ -119,9 +119,9 @@ export class CategoriasComponent implements OnInit {
 	}
 
 	tratarCategoriasTotal(dados: Gasto[]): CategoriasTotal {
-		let dadosGeral = dados.filter((item) => item.tipo === 1 && item.active === 1)
-		let dadosTransporte = dados.filter((item) => item.tipo === 2 && item.active === 1)
-		let dadosAlimentacao = dados.filter((item) => item.tipo === 3 && item.active === 1)
+		let dadosGeral = dados.filter((item) => item.tipo === 1 && item.active === 1 && !item.descricao?.includes("*"))
+		let dadosTransporte = dados.filter((item) => item.tipo === 2 && item.active === 1 && !item.descricao?.includes("*"))
+		let dadosAlimentacao = dados.filter((item) => item.tipo === 3 && item.active === 1 && !item.descricao?.includes("*"))
 
 		return {
 			Geral: dadosGeral.reduce((anterior, atual) => anterior + (atual.valor || 0), 0).toFixed(2),
