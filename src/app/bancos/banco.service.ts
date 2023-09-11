@@ -19,6 +19,12 @@ export type Tile = Banco & {
 	totalInativos: string
 }
 
+export interface GastosPessoais {
+	geral: number
+	tiago: number
+	luana: number
+}
+
 @Injectable({
 	providedIn: 'root'
 })
@@ -26,6 +32,11 @@ export class BancoService {
 
 	async listarGastoPorBancos(mes: number = new Date().getMonth() + 1, ano: number = new Date().getFullYear()): Promise<Tile[]> {
 		let { data } = await axios.get(urlApi + `/bancos/gastosPorBanco/mes=${mes}/ano=${ano}`)
+		return data
+	}
+
+	async listarRestantesPessoais(mes: number = new Date().getMonth() + 1, ano: number = new Date().getFullYear()): Promise<GastosPessoais> {
+		let { data } = await axios.get(urlApi + `/bancos/gastosPessoais/mes=${mes}/ano=${ano}`)
 		return data
 	}
 

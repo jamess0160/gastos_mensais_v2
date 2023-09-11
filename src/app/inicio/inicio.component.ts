@@ -40,6 +40,9 @@ export class InicioComponent implements OnInit {
     totalEntradas: string = ""
     restante: string = ""
     restanteInativos: string = ""
+    restanteLuana: string = ""
+    restanteGeral: string = ""
+    restanteTiago: string = ""
 
     ngOnInit() {
         utils.callInterval(this.carregarDados, 2000, "Ocorreu um erro ao carregar os dados", this)
@@ -62,6 +65,16 @@ export class InicioComponent implements OnInit {
 
         this.restante = (parseFloat(this.totalEntradas) - parseFloat(this.totalGastos)).toFixed(2)
         this.restanteInativos = (parseFloat(this.totalEntradas) - parseFloat(this.totalGastosInativos)).toFixed(2)
+
+        this.calcularGastosPessoais(mes, ano)
+    }
+
+    private async calcularGastosPessoais(mes?: number, ano?: number) {
+        let restantePessoais = await this.BancoService.listarRestantesPessoais(mes, ano)
+
+        this.restanteGeral = restantePessoais.geral.toFixed(2)
+        this.restanteTiago = restantePessoais.tiago.toFixed(2)
+        this.restanteLuana = restantePessoais.luana.toFixed(2)
     }
 
     abrirAdicionar() {
@@ -83,8 +96,6 @@ export class InicioComponent implements OnInit {
     }
 
     validarMes() {
-        if (!this.localMes) return true
-
-        return this.localMes == (new Date().getMonth() + 1).toString()
+        return Boolean(this.localMes) === false
     }
 }
