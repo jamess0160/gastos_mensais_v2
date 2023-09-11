@@ -59,13 +59,14 @@ export class CategoriasComponent implements OnInit {
 	editarForm: FormularioEditarGasto = {
 		id: 0,
 		data_registro: "",
-		data: "",
 		descricao: "",
-		parcela_atual: 0,
-		parcelas_totais: 0,
 		valor: 0,
 		tipo: "",
-		banco: ""
+		banco: "",
+		padrao: false,
+		parcela: false,
+		fixo: false,
+		destino: ""
 	}
 
 	resolveDelete: any
@@ -189,15 +190,29 @@ export class CategoriasComponent implements OnInit {
 	editar(itemEditar: Gasto) {
 		this.dialogEditar = true
 
+		if (itemEditar.fixo) {
+			this.editarForm.fixo = true
+		}
+
 		if (itemEditar.data_gasto) this.editarForm.data = moment(itemEditar.data_gasto, "DD/MM/YYYY").format('YYYY-MM-DD')
 		if (itemEditar.banco_id) this.editarForm.banco = itemEditar.banco_id.toString()
 		if (itemEditar.descricao) this.editarForm.descricao = itemEditar.descricao
-		if (itemEditar.parcela_atual) this.editarForm.parcela_atual = itemEditar.parcela_atual
-		if (itemEditar.parcelas_totais) this.editarForm.parcelas_totais = itemEditar.parcelas_totais
+		if (itemEditar.destino) this.editarForm.destino = itemEditar.destino.toString()
+
+		if (itemEditar.parcela_atual && itemEditar.parcelas_totais) {
+			this.editarForm.parcela_atual = itemEditar.parcela_atual
+			this.editarForm.parcelas_totais = itemEditar.parcelas_totais
+			this.editarForm.parcela = true
+		}
+
 		if (itemEditar.tipo) this.editarForm.tipo = itemEditar.tipo.toString()
 		if (itemEditar.valor) this.editarForm.valor = itemEditar.valor
 		if (itemEditar.data_registro) this.editarForm.data_registro = moment(itemEditar.data_registro).format('YYYY-MM-DD')
 		if (itemEditar.id) this.editarForm.id = itemEditar.id
+
+		if (!this.editarForm.parcela && !this.editarForm.fixo) {
+			this.editarForm.padrao = true
+		}
 	}
 
 	tratarData(item: Gasto) {
@@ -211,7 +226,7 @@ export class CategoriasComponent implements OnInit {
 			return `(${atual}/${maximo})`
 		}
 
-		if (!item.data_gasto) {
+		if (item.fixo) {
 			return "Fixo"
 		}
 

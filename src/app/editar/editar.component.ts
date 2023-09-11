@@ -2,6 +2,7 @@ import { Component, Input, Output, EventEmitter, OnInit } from '@angular/core';
 import { Banco, BancoService } from '../bancos';
 import { GastoService } from '../gastos';
 import utils from '../utils';
+import { tiposCheckBox } from '../adicionar/adicionar.component';
 
 export type FormularioEditarGasto = {
 	id: number,
@@ -12,7 +13,11 @@ export type FormularioEditarGasto = {
 	parcelas_totais?: number,
 	valor: number,
 	tipo: string,
-	banco: string
+	banco: string,
+	padrao: boolean,
+	parcela: boolean,
+	fixo: boolean,
+	destino: string
 }
 
 const DEFAULT_FORM: FormularioEditarGasto = {
@@ -21,7 +26,11 @@ const DEFAULT_FORM: FormularioEditarGasto = {
 	descricao: "",
 	valor: 0,
 	tipo: "",
-	banco: ""
+	banco: "",
+	padrao: false,
+	parcela: false,
+	fixo: false,
+	destino: ""
 }
 
 @Component({
@@ -73,9 +82,11 @@ export class EditarComponent implements OnInit {
 			banco_id: parseInt(this.formulario.banco),
 			descricao: this.formulario.descricao,
 			parcela_atual: this.formulario.parcela_atual || null,
-			parcelas_totais: this.formulario.parcelas_totais || null,
+			parcelas_totais: this.formulario.parcelas_totais,
 			valor: this.formulario.valor,
-			tipo: parseInt(this.formulario.tipo)
+			tipo: parseInt(this.formulario.tipo),
+			destino: parseInt(this.formulario.destino),
+			fixo: this.formulario.fixo
 		})
 
 		if (!sucesso) {
@@ -116,5 +127,18 @@ export class EditarComponent implements OnInit {
 		this.classesDialog[1] = ''
 		this.formulario = { ...DEFAULT_FORM }
 		this.fecharDialog()
+	}
+
+	checkBoxMudou(tipo: tiposCheckBox, event: Event) {
+		this.formulario.padrao = false
+		this.formulario.parcela = false
+		this.formulario.fixo = false
+
+		delete this.formulario.parcela_atual
+		delete this.formulario.parcelas_totais
+
+		let input = event.target as HTMLInputElement
+
+		this.formulario[tipo] = input.checked
 	}
 }

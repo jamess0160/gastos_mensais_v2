@@ -130,14 +130,17 @@ export class AdicionarComponent implements OnInit {
 	}
 
 	checkBoxMudou(tipo: tiposCheckBox, event: Event) {
-		let input = event.target as HTMLInputElement
-
 		this.formulario.padrao = false
 		this.formulario.parcela = false
 		this.formulario.fixo = false
+
+		delete this.formulario.parcela_atual
+		delete this.formulario.parcelas_totais
+
+		let input = event.target as HTMLInputElement
 
 		this.formulario[tipo] = input.checked
 	}
 }
 
-type tiposCheckBox = "padrao" | "parcela" | "fixo"
+export type tiposCheckBox = "padrao" | "parcela" | "fixo"

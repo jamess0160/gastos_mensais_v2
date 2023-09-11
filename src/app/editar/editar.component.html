@@ -1,23 +1,39 @@
 <div class="container" *ngIf="this.dialogOpen">
     <div [ngClass]="classesDialog">
-        <h1>Novo Gasto</h1>
+        <h1>Editar Gasto</h1>
         <div class="campo">
             <legend>Data de Registro</legend>
             <input [(ngModel)]="formulario.data_registro" type="date">
-        </div>
-        <div class="campo">
-            <legend>Data do Gasto</legend>
-            <input [(ngModel)]="formulario.data" type="date">
         </div>
         <div class="campo" [ngStyle]="this.campoObrigatorio">
             <legend>Descrição</legend>
             <input [(ngModel)]="formulario.descricao" type="text">
         </div>
-        <div class="campo">
+        <div class="campo checkParent">
+            <div class="checkGroup">
+                <div>
+                    <input type="checkbox" [(ngModel)]="formulario.padrao" (change)="checkBoxMudou('padrao', $event)">
+                    Padrão
+                </div>
+                <div>
+                    <input type="checkbox" [(ngModel)]="formulario.parcela" (change)="checkBoxMudou('parcela', $event)">
+                    Parcela
+                </div>
+                <div>
+                    <input type="checkbox" [(ngModel)]="formulario.fixo" (change)="checkBoxMudou('fixo', $event)">
+                    Fixo
+                </div>
+            </div>
+        </div>
+        <div *ngIf="formulario.padrao" class="campo">
+            <legend>Data do Gasto</legend>
+            <input [(ngModel)]="formulario.data" type="date">
+        </div>
+        <div *ngIf="formulario.parcela" class="campo">
             <legend>Parcela atual</legend>
             <input [(ngModel)]="formulario.parcela_atual" type="number">
         </div>
-        <div class="campo">
+        <div *ngIf="formulario.parcela" class="campo">
             <legend>Parcelas totais</legend>
             <input [(ngModel)]="formulario.parcelas_totais" type="number">
         </div>
@@ -26,9 +42,16 @@
             <input [(ngModel)]="formulario.valor" type="number">
         </div>
         <div class="campo" [ngStyle]="this.campoObrigatorio">
+            <legend>Destino</legend>
+            <select [(ngModel)]="formulario.destino">
+                <option value="1">Geral</option>
+                <option value="2">Tiago</option>
+                <option value="3">Luana</option>
+            </select>
+        </div>
+        <div class="campo" [ngStyle]="this.campoObrigatorio">
             <legend>Tipo de gasto</legend>
             <select [(ngModel)]="formulario.tipo">
-                <option value="0" selected disabled>Selecione um gasto</option>
                 <option value="1">Geral</option>
                 <option value="2">Transporte</option>
                 <option value="3">Alimentação</option>
@@ -37,7 +60,6 @@
         <div class="campo" [ngStyle]="this.campoObrigatorio">
             <legend>Banco</legend>
             <select [(ngModel)]="formulario.banco">
-                <option value="0" selected disabled>Selecione um banco</option>
                 <option *ngFor="let item of this.bancos" value="{{item.id}}">{{item.nome}}</option>
             </select>
         </div>

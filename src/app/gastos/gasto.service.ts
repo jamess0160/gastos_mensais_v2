@@ -3,16 +3,18 @@ import axios from 'axios';
 import { urlApi } from 'src/app/constants';
 
 export type Gasto = {
-	id?: number,
-	data_gasto?: string | null,
-	data_registro?: string | null,
-	descricao?: string | null,
-	parcela_atual?: number | null,
-	parcelas_totais?: number | null,
-	valor?: number | null,
-	tipo?: number | null,
+	id?: number
+	data_gasto?: string | null
+	data_registro?: string | null
+	descricao?: string | null
+	parcela_atual?: number | null
+	parcelas_totais?: number | null
+	valor?: number | null
+	tipo?: number | null
+	destino?: number | null
 	banco_id?: number | null
 	active?: 1 | 0
+	fixo?: boolean
 }
 
 @Injectable({
