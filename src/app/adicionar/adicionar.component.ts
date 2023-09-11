@@ -11,14 +11,22 @@ type FormularioAdicionarGasto = {
 	parcelas_totais?: number,
 	valor: number,
 	tipo: string,
-	banco: string
+	banco: string,
+	padrao: boolean,
+	parcela: boolean,
+	fixo: boolean,
+	destino: string
 }
 
-const DEFAULT_FORM = {
+const DEFAULT_FORM: FormularioAdicionarGasto = {
 	descricao: "",
 	valor: 0,
 	tipo: "",
-	banco: ""
+	banco: "",
+	padrao: false,
+	parcela: false,
+	fixo: false,
+	destino: ""
 }
 
 @Component({
@@ -56,6 +64,9 @@ export class AdicionarComponent implements OnInit {
 			this.erroForm()
 			return
 		}
+
+		console.log(this.formulario.data, this.formulario.data_registro)
+
 		let sucesso = await this.GastosService.inserirGasto({
 			data_registro: this.formulario.data_registro,
 			data_gasto: this.formulario.data,
@@ -64,7 +75,9 @@ export class AdicionarComponent implements OnInit {
 			parcela_atual: this.formulario.parcela_atual,
 			parcelas_totais: this.formulario.parcelas_totais,
 			valor: this.formulario.valor,
-			tipo: parseInt(this.formulario.tipo)
+			tipo: parseInt(this.formulario.tipo),
+			destino: parseInt(this.formulario.destino),
+			fixo: this.formulario.fixo
 		})
 
 		if (!sucesso) {
@@ -80,6 +93,15 @@ export class AdicionarComponent implements OnInit {
 		if (!this.formulario.descricao) return false
 		if (!this.formulario.valor) return false
 		if (!this.formulario.tipo) return false
+
+		if (
+			this.formulario.padrao === false &&
+			this.formulario.parcela === false &&
+			this.formulario.fixo === false
+		) return false
+
+		if (this.formulario.parcela_atual && !this.formulario.parcela_atual) return false
+		if (!this.formulario.parcela_atual && this.formulario.parcela_atual) return false
 
 		this.erroFormulario = false
 		return true
@@ -106,4 +128,16 @@ export class AdicionarComponent implements OnInit {
 		this.classesDialog[1] = ''
 		this.formulario = { ...DEFAULT_FORM }
 	}
+
+	checkBoxMudou(tipo: tiposCheckBox, event: Event) {
+		let input = event.target as HTMLInputElement
+
+		this.formulario.padrao = false
+		this.formulario.parcela = false
+		this.formulario.fixo = false
+
+		this.formulario[tipo] = input.checked
+	}
 }
+
+type tiposCheckBox = "padrao" | "parcela" | "fixo"
