@@ -1,1 +1,1 @@
-export const urlApi: string = `http://${location.hostname}:3001`
+export const urlApi: string = `http://${location.hostname}:3000`
