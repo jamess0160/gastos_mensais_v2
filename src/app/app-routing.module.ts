@@ -3,6 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { CategoriasComponent } from './categorias/categorias.component';
 import { ConfiguracoesComponent } from './configuracoes/configuracoes.component';
 import { InicioComponent } from './inicio/inicio.component';
+import { PessoaisComponent } from './pessoais/pessoais.component';
 
 const routes: Routes = [
 	{
@@ -19,10 +20,14 @@ const routes: Routes = [
 		component: CategoriasComponent
 	},
 	{
+		path: "pessoais/:destino/:categoria",
+		component: PessoaisComponent
+	},
+	{
 		path: "configuracoes",
 		component: ConfiguracoesComponent
 	}
-]; 
+];
 
 @NgModule({
 	imports: [RouterModule.forRoot(routes)],

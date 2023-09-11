@@ -1,0 +1,104 @@
+<section>
+    <app-voltar></app-voltar>
+    <div [className]="'container ' + classeTiles[0]" *ngIf="tileGeral">
+        <div class="titulo">
+            <h1>Compras em geral</h1>
+            <div class="iconeBanco">
+                {{destinoString}}
+            </div>
+        </div>
+        <table>
+            <tr *ngFor="let item of gastos.Geral">
+                <td>
+                    <div>{{tratarData(item)}}</div>
+                    <div>{{item.descricao}}</div>
+                    <div>{{item.valor ? 'R$' + item.valor: ''}}</div>
+                    <div [style]="item.descricao ? '' : 'display: none'">
+                        <input style="margin-right: 1rem;" type="checkbox" [checked]="item.active"
+                            (change)="changeActive(item)">
+
+                        <img style="margin-right: 1rem;" src="../../assets/edit.png" alt="Editar" title="Editar"
+                            (click)="editar(item)">
+                        <img src="../../assets/delete.png" alt="Deletar" title="Deletar"
+                            (click)="confirmarDelete(item.id)">
+                    </div>
+                </td>
+            </tr>
+        </table>
+        <h1>R$ {{total.Geral}}</h1>
+    </div>
+    <div [className]="'container ' + classeTiles[1]" *ngIf="tileTransporte">
+        <div class="titulo">
+            <h1>Transportes</h1>
+            <div class="iconeBanco">
+                {{destinoString}}
+            </div>
+        </div>
+        <table>
+            <tr *ngFor="let item of gastos.Transporte">
+                <td>
+                    <div>{{tratarData(item)}}</div>
+                    <div>{{item.descricao}}</div>
+                    <div>{{item.valor ? 'R$' + item.valor: ''}}</div>
+                    <div [style]="item.descricao ? '' : 'display: none'">
+                        <input style="margin-right: 1rem;" type="checkbox" [checked]="item.active"
+                            (change)="changeActive(item)">
+
+                        <img style="margin-right: 1rem;" src="../../assets/edit.png" alt="Editar" title="Editar"
+                            (click)="editar(item)">
+                        <img src="../../assets/delete.png" alt="Deletar" title="Deletar"
+                            (click)="confirmarDelete(item.id)">
+                    </div>
+                </td>
+            </tr>
+        </table>
+        <h1>R$ {{total.Transporte}}</h1>
+    </div>
+    <div [className]="'container ' + classeTiles[2]" *ngIf="tileAlimentacao">
+        <div class="titulo">
+            <h1>Alimentação</h1>
+            <div class="iconeBanco">
+                {{destinoString}}
+            </div>
+        </div>
+        <table>
+            <tr *ngFor="let item of gastos.Alimentacao">
+                <td>
+                    <div>{{tratarData(item)}}</div>
+                    <div>{{item.descricao}}</div>
+                    <div>{{item.valor ? 'R$' + item.valor: ''}}</div>
+                    <div [style]="item.descricao ? '' : 'display: none'">
+                        <input style="margin-right: 1rem;" type="checkbox" [checked]="item.active"
+                            (change)="changeActive(item)">
+
+                        <img style="margin-right: 1rem;" src="../../assets/edit.png" alt="Editar" title="Editar"
+                            (click)="editar(item)">
+                        <img src="../../assets/delete.png" alt="Deletar" title="Deletar"
+                            (click)="confirmarDelete(item.id)">
+                    </div>
+                </td>
+            </tr>
+        </table>
+        <h1>R$ {{total.Alimentacao}}</h1>
+    </div>
+    <div class="imgContainer left" *ngIf="tipoCategoria !== 1">
+        <img src="../../assets/left-arrow.png" alt="Avançar" title="Próxima categoria" (click)="mudarPagina(-1)">
+    </div>
+    <div class="imgContainer right" *ngIf="tipoCategoria !== 3">
+        <img class="reverse" src="../../assets/left-arrow.png" alt="Avançar" title="Próxima categoria"
+            (click)="mudarPagina(1)">
+    </div>
+
+    <app-editar [dialogOpen]="dialogEditar" [formulario]="editarForm" (dialogOpenChange)="dialogEditar = $event"
+        (formularioChange)="editarForm = $event"></app-editar>
+</section>
+
+<div *ngIf="dialogDelete" class="containerMensagem">
+    <div class="mensagemDelete">
+        <h1 class="texto">Você deseja mesmo deletar esse registro?</h1>
+        <div class="botoes">
+            <button class="cancelar" (click)="resolveDelete(false)">Cancelar</button>
+            <button class="confirmar" (click)="resolveDelete(true)">Sim</button>
+        </div>
+    </div>
+</div>

@@ -12,12 +12,14 @@
     flex-wrap: wrap;
     row-gap: 2rem;
 
-    >div {
+    >div,
+    >a {
         width: 18%;
         padding: 1rem;
         padding-top: 0.5rem;
         border-radius: 15px;
         height: 4rem;
+        text-decoration: none;
 
         .title {
             font-size: 0.90em;

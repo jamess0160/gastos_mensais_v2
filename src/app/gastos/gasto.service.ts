@@ -42,6 +42,24 @@ export class GastoService {
 		}
 	}
 
+	async listarGastosPessoais(destino: number, tipo: number, mes: number = new Date().getMonth() + 1, ano: number = new Date().getFullYear()): Promise<Gasto[]> {
+		try {
+			let { data }: { data: Gasto[] } = await axios.get(`${urlApi}/registro_gastos/pessoais/${destino}/${tipo}/${mes}/${ano}`)
+			data.forEach((item) => {
+				item.data_gasto = item.data_gasto ? new Date(item.data_gasto).toLocaleDateString('pt-br') : ""
+				if (item.descricao) {
+					let letras = item.descricao.split("")
+					letras[0] = letras[0].toUpperCase()
+					item.descricao = letras.join("")
+				}
+			})
+			return data
+		} catch (error) {
+			console.error(error)
+			return []
+		}
+	}
+
 	async inserirGasto(gasto: Gasto): Promise<boolean> {
 		try {
 			await axios.post(`${urlApi}/registro_gastos/`, gasto)
