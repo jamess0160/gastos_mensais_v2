@@ -90,6 +90,14 @@ export class PessoaisComponent implements OnInit {
 
 		let mes = localMes ? parseInt(localMes) : undefined
 		let ano = localAno ? parseInt(localAno) : undefined
+
+		if (this.destino === 1) {
+			let dados = await this.gastosAPI.listarGastosPessoais(this.destino, this.tipoCategoria, mes, ano)
+			this.gastos = this.tratarCategorias(dados)
+			this.total = this.tratarCategoriasTotal(dados)
+			return
+		}
+
 		let [dados, conjunto] = await Promise.all([
 			this.gastosAPI.listarGastosPessoais(this.destino, this.tipoCategoria, mes, ano),
 			this.gastosAPI.listarGastosPessoais(4, this.tipoCategoria, mes, ano)
