@@ -4,7 +4,7 @@ import { urlApi } from 'src/app/constants';
 
 export type Entrada = {
 	id: number,
-	nome: string,
+	tipo_id: number,
 	valor: number,
 }
 
@@ -13,7 +13,7 @@ export type Entrada = {
 })
 export class EntradaService {
 
-	async listarEntradas(mes: number = new Date().getMonth() + 1, ano: number = new Date().getFullYear()): Promise<Entrada[]> {
+	async listarEntradas(mes: number = new Date().getMonth() + 1, ano: number = new Date().getFullYear()): Promise<(Entrada & { nome: string })[]> {
 		try {
 			let { data } = await axios.get(urlApi + `/entradas/recentes/mes=${mes}/ano=${ano}`)
 			return data
@@ -23,7 +23,7 @@ export class EntradaService {
 		}
 	}
 
-	async inserirEntrada(entrada: Entrada): Promise<boolean> {
+	async inserirEntrada(entrada: Partial<Entrada>): Promise<boolean> {
 		try {
 			await axios.post(`${urlApi}/entradas/`, entrada)
 			return true
@@ -33,7 +33,7 @@ export class EntradaService {
 		}
 	}
 
-	async atualizarEntrada(dadosNovos: Entrada, id: number): Promise<boolean> {
+	async atualizarEntrada(id: number, dadosNovos: Partial<Entrada>): Promise<boolean> {
 		try {
 			await axios.put(`${urlApi}/entradas/${id}`, dadosNovos)
 			return true

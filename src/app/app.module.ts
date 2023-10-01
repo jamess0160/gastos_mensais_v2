@@ -16,6 +16,8 @@ import { AdicionarBancoComponent } from './adicionar-banco/adicionar-banco.compo
 import { EditarComponent } from './editar/editar.component';
 import { EditarBancoComponent } from './editar-banco/editar-banco.component';
 import { PessoaisComponent } from './pessoais/pessoais.component';
+import { AdicionarEntradaComponent } from './adicionar-entrada/adicionar-entrada.component';
+import { EditarEntradaComponent } from './editar-entrada/editar-entrada.component';
 
 @NgModule({
   declarations: [
@@ -28,7 +30,9 @@ import { PessoaisComponent } from './pessoais/pessoais.component';
     AdicionarBancoComponent,
     EditarComponent,
     EditarBancoComponent,
-    PessoaisComponent
+    PessoaisComponent,
+    AdicionarEntradaComponent,
+    EditarEntradaComponent
   ],
   imports: [
     BrowserModule,

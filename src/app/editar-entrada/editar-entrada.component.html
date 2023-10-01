@@ -1,0 +1,23 @@
+<div class="container" *ngIf="this.dialogOpen">
+    <div class="dialog">
+        <h1>Editar Entrada</h1>
+        <div class="campo">
+            <legend>Tipo</legend>
+            <select [(ngModel)]="formulario.tipo">
+                <option value="4">Geral</option>
+                <option value="1">Salário Tiago</option>
+                <option value="2">Salário Luana</option>
+                <option value="3">Sobra</option>
+            </select>
+        </div>
+        <div class="campo">
+            <legend>Valor</legend>
+            <input [(ngModel)]="formulario.valor" type="number">
+        </div>
+
+        <div class="botoes">
+            <button class="cancelar" (click)="fecharDialog()">Cancelar</button>
+            <button class="cadastrar" (click)="editarEntrada()">Cadastrar</button>
+        </div>
+    </div>
+</div>

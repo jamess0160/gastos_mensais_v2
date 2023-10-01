@@ -2,8 +2,9 @@
     <app-voltar></app-voltar>
     <div class="container">
         <div class="mesAno">
+            <div class="msg">Data atualizada com sucesso!</div>
             <div class="titulo">Configuração de data</div>
-            <select [(ngModel)]="mes">
+            <select [(ngModel)]="mes" (change)="salvarData()">
                 <option value="0" disabled selected>Escolha um mês</option>
                 <option value="1">Janeiro</option>
                 <option value="2">Fevereiro</option>
@@ -18,8 +19,44 @@
                 <option value="11">Novembro</option>
                 <option value="12">Dezembro</option>
             </select>
-            <input [(ngModel)]="ano" type="number" placeholder="Ano">
-            <button (click)="salvarData()">Salvar</button>
+            <input [(ngModel)]="ano" type="number" placeholder="Ano" (change)="salvarData()">
         </div>
+
+        <table>
+            <tr class="header">
+                <td>
+                    <div>Entradas (1)</div>
+                    <div class="end">
+                        <img style="margin-right: 1rem;" src="../../assets/addwhite.png" alt="Adicionar"
+                            title="Adicionar" (click)="adicionar()">
+                    </div>
+                </td>
+            </tr>
+            <tr class="row" *ngFor="let item of entradas">
+                <td>
+                    <div>{{item.nome}}</div>
+                    <div>R${{item.valor}}</div>
+                    <div class="end">
+                        <img style="margin-right: 1rem;" src="../../assets/edit.png" alt="Editar" title="Editar"
+                            (click)="editar(item)">
+                        <img src="../../assets/delete.png" alt="Deletar" title="Deletar"
+                            (click)="confirmarDelete(item.id)">
+                    </div>
+                </td>
+            </tr>
+        </table>
     </div>
 </section>
+
+<app-adicionar-entrada [dialogOpen]="dialogAdicionar" (dialogOpenChange)="dialogAdicionar=$event" />
+<app-editar-entrada [dialogOpen]="dialogEditar" (dialogOpenChange)="dialogEditar=$event" [formulario]="formularioEditar"/>
+
+<div *ngIf="dialogDelete" class="containerMensagem">
+    <div class="mensagemDelete">
+        <h1 class="texto">Você deseja mesmo deletar esse registro?</h1>
+        <div class="botoes">
+            <button class="cancelar" (click)="resolveDelete(false)">Cancelar</button>
+            <button class="confirmar" (click)="resolveDelete(true)">Sim</button>
+        </div>
+    </div>
+</div>
