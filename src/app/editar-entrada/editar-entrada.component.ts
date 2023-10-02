@@ -4,12 +4,14 @@ import { EntradaService } from '../entradas';
 export type FormularioEditarEntrada = {
 	id: number,
 	tipo: number,
+	nome: string,
 	valor: number
 }
 
 const DEFAULT_FORM: FormularioEditarEntrada = {
 	id: 0,
 	tipo: 0,
+	nome: "",
 	valor: 0,
 }
 
@@ -37,6 +39,7 @@ export class EditarEntradaComponent {
 		}
 		let sucesso = await this.EntradaService.atualizarEntrada(this.formulario.id, {
 			tipo_id: this.formulario.tipo,
+			nome: this.formulario.nome,
 			valor: this.formulario.valor,
 		})
 

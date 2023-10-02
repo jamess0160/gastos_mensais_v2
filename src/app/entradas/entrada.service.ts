@@ -6,6 +6,7 @@ export type Entrada = {
 	id: number,
 	tipo_id: number,
 	valor: number,
+	nome: string
 }
 
 @Injectable({
@@ -13,7 +14,7 @@ export type Entrada = {
 })
 export class EntradaService {
 
-	async listarEntradas(mes: number = new Date().getMonth() + 1, ano: number = new Date().getFullYear()): Promise<(Entrada & { nome: string })[]> {
+	async listarEntradas(mes: number = new Date().getMonth() + 1, ano: number = new Date().getFullYear()): Promise<(Entrada & { nome_tipo: string })[]> {
 		try {
 			let { data } = await axios.get(urlApi + `/entradas/recentes/mes=${mes}/ano=${ano}`)
 			return data
@@ -51,5 +52,9 @@ export class EntradaService {
 			alert("Ocorreu um erro ao Deletar a Entrada")
 			return false
 		}
+	}
+
+	async clonar(mes: number = new Date().getMonth(), ano: number = new Date().getFullYear()) {
+		return axios.post(urlApi + "/entradas/clonar", { mes, ano })
 	}
 }

@@ -3,6 +3,7 @@ import { EntradaService } from '../entradas';
 
 type FormularioAdicionarEntrada = {
 	tipo: number,
+	nome: string
 	valor: number
 }
 
@@ -19,6 +20,7 @@ export class AdicionarEntradaComponent {
 
 	formulario: FormularioAdicionarEntrada = {
 		tipo: 0,
+		nome: "",
 		valor: 0,
 	}
 
@@ -34,6 +36,7 @@ export class AdicionarEntradaComponent {
 		}
 		let sucesso = await this.EntradaService.inserirEntrada({
 			tipo_id: this.formulario.tipo,
+			nome: this.formulario.nome,
 			valor: this.formulario.valor,
 		})
 
@@ -44,6 +47,7 @@ export class AdicionarEntradaComponent {
 
 		this.formulario = {
 			tipo: 0,
+			nome: "",
 			valor: 0,
 		}
 

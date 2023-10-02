@@ -4,11 +4,14 @@
         <div class="campo">
             <legend>Tipo</legend>
             <select [(ngModel)]="formulario.tipo">
-                <option value="4">Geral</option>
-                <option value="1">Salário Tiago</option>
-                <option value="2">Salário Luana</option>
-                <option value="3">Sobra</option>
+                <option value="1">Geral</option>
+                <option value="2">Pessoal Tiago</option>
+                <option value="3">Pessoal Luana</option>
             </select>
+        </div>
+        <div class="campo">
+            <legend>Descrição</legend>
+            <input [(ngModel)]="formulario.nome">
         </div>
         <div class="campo">
             <legend>Valor</legend>

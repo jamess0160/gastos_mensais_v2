@@ -22,10 +22,12 @@
             <input [(ngModel)]="ano" type="number" placeholder="Ano" (change)="salvarData()">
         </div>
 
+        <button class="clone" (click)="clonar()">Clonar entradas anteriores</button>
+
         <table>
             <tr class="header">
                 <td>
-                    <div>Entradas (1)</div>
+                    <div>Entradas ({{entradas.length}})</div>
                     <div class="end">
                         <img style="margin-right: 1rem;" src="../../assets/addwhite.png" alt="Adicionar"
                             title="Adicionar" (click)="adicionar()">
@@ -35,6 +37,7 @@
             <tr class="row" *ngFor="let item of entradas">
                 <td>
                     <div>{{item.nome}}</div>
+                    <div>{{item.nome_tipo}}</div>
                     <div>R${{item.valor}}</div>
                     <div class="end">
                         <img style="margin-right: 1rem;" src="../../assets/edit.png" alt="Editar" title="Editar"
@@ -49,7 +52,8 @@
 </section>
 
 <app-adicionar-entrada [dialogOpen]="dialogAdicionar" (dialogOpenChange)="dialogAdicionar=$event" />
-<app-editar-entrada [dialogOpen]="dialogEditar" (dialogOpenChange)="dialogEditar=$event" [formulario]="formularioEditar"/>
+<app-editar-entrada [dialogOpen]="dialogEditar" (dialogOpenChange)="dialogEditar=$event"
+    [formulario]="formularioEditar" />
 
 <div *ngIf="dialogDelete" class="containerMensagem">
     <div class="mensagemDelete">
@@ -57,6 +61,16 @@
         <div class="botoes">
             <button class="cancelar" (click)="resolveDelete(false)">Cancelar</button>
             <button class="confirmar" (click)="resolveDelete(true)">Sim</button>
+        </div>
+    </div>
+</div>
+
+<div *ngIf="dialogClonar" class="containerMensagem">
+    <div class="mensagemDelete">
+        <h1 class="texto">Você deseja mesmo clonar as entradas do mês anterior?</h1>
+        <div class="botoes">
+            <button class="cancelar" (click)="resolveClonar(false)">Cancelar</button>
+            <button class="confirmar" (click)="resolveClonar(true)">Sim</button>
         </div>
     </div>
 </div>

@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Entrada, EntradaService } from '../entradas';
 import Utils from '../utils';
 import { FormularioEditarEntrada } from '../editar-entrada/editar-entrada.component';
+import * as moment from 'moment';
 
 @Component({
 	selector: 'app-configuracoes',
@@ -11,16 +12,21 @@ import { FormularioEditarEntrada } from '../editar-entrada/editar-entrada.compon
 export class ConfiguracoesComponent implements OnInit {
 	mes: string = localStorage.getItem("mes") || (new Date().getMonth() + 1).toString()
 	ano: string = localStorage.getItem("ano") || new Date().getFullYear().toString()
-	entradas: (Entrada & { nome: string })[] = []
+	entradas: (Entrada & { nome_tipo: string })[] = []
 
 	dialogAdicionar = false
 	dialogEditar = false
+
 	dialogDelete = false
 	resolveDelete: any
+
+	dialogClonar = false
+	resolveClonar: any
 
 	formularioEditar: FormularioEditarEntrada = {
 		id: 0,
 		tipo: 0,
+		nome: "",
 		valor: 0
 	}
 
@@ -75,6 +81,7 @@ export class ConfiguracoesComponent implements OnInit {
 		this.formularioEditar = {
 			id: item.id,
 			tipo: item.tipo_id,
+			nome: item.nome,
 			valor: item.valor
 		}
 
@@ -92,5 +99,34 @@ export class ConfiguracoesComponent implements OnInit {
 
 		await this.EntradaService.deletarEntrada(id)
 		alert("Entrada deletada com sucesso!")
+	}
+
+	async clonar() {
+		try {
+			this.dialogClonar = true
+			let confirmDelete = await new Promise((resolve) => this.resolveClonar = resolve)
+			this.dialogClonar = false
+
+			if (!confirmDelete) {
+				return
+			}
+
+			let localMes = localStorage.getItem("mes")
+			let localAno = localStorage.getItem("ano")
+
+			let mes = localMes ? parseInt(localMes) : new Date().getMonth() + 1
+			let ano = localAno ? parseInt(localAno) : new Date().getFullYear()
+
+			let momentdate = moment().startOf("month").set("year", ano).set("month", mes).subtract(1, "month").subtract(1, "day")
+
+			let momentMes = momentdate.toDate().getMonth() + 1
+			let momentAno = momentdate.toDate().getFullYear()
+
+			await this.EntradaService.clonar(momentMes, momentAno)
+			alert("Entradas anteriores clonadas com sucesso!")
+		} catch (error) {
+			console.log(error)
+			alert("Ocorreu um erro ao clonar as entradas anteriores!")
+		}
 	}
 }

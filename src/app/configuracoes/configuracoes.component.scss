@@ -31,10 +31,14 @@ section {
     display: flex;
     justify-content: end !important;
 
-    img{
+    img {
         width: 1rem;
         cursor: pointer;
     }
+}
+
+.clone {
+    width: 30%;
 }
 
 table {
