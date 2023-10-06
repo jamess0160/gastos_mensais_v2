@@ -38,6 +38,7 @@ export class InicioComponent implements OnInit {
     totalGastos: string = ""
     totalGastosInativos: string = ""
     totalEntradas: string = ""
+    entradasPessoais: string = ""
     restante: string = ""
     restanteInativos: string = ""
     restanteLuana: string = ""
@@ -57,6 +58,17 @@ export class InicioComponent implements OnInit {
 
         this.tiles = await this.BancoService.listarGastoPorBancos(mes, ano)
         let entradas = await this.EntradaService.listarEntradas(mes, ano)
+
+        this.entradasPessoais = entradas.reduce((old, item) => {
+
+            if (item.tipo_id !== 1) {
+                return old + item.valor
+            }
+
+            return old
+        }, 0).toFixed(2)
+
+        entradas = entradas.filter((item) => item.tipo_id === 1)
 
         this.totalGastosInativos = this.tiles.reduce((anterior, atual) => anterior + parseFloat(atual.totalInativos), 0).toFixed(2)
         this.totalGastos = this.tiles.reduce((anterior, atual) => anterior + parseFloat(atual.total), 0).toFixed(2)
