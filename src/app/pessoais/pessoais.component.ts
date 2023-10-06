@@ -104,12 +104,7 @@ export class PessoaisComponent implements OnInit {
 		])
 
 		conjunto.forEach((item) => {
-			if (!item.valor) return
-
-			dados.push({
-				...item,
-				valor: item.valor / 2
-			})
+			dados.push(item)
 		})
 
 		this.gastos = this.tratarCategorias(dados)

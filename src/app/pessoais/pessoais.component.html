@@ -66,7 +66,7 @@
                 <td>
                     <div>{{tratarData(item)}}</div>
                     <div>{{item.descricao}}</div>
-                    <div>{{item.valor ? 'R$' + item.valor: ''}}</div>
+                    <div>{{item.valor ? item.destino === 4 ? 'R$' + item.valor / 2 :'R$' + item.valor : ''}}</div>
                     <div [style]="item.descricao ? '' : 'display: none'">
                         <input style="margin-right: 1rem;" type="checkbox" [checked]="item.active"
                             (change)="changeActive(item)">
