@@ -143,9 +143,21 @@ export class PessoaisComponent implements OnInit {
 		let dadosAlimentacao = dados.filter((item) => item.tipo === 3 && item.active === 1 && !item.descricao?.includes("*"))
 
 		return {
-			Geral: dadosGeral.reduce((anterior, atual) => anterior + (atual.valor || 0), 0).toFixed(2),
-			Transporte: dadosTransporte.reduce((anterior, atual) => anterior + (atual.valor || 0), 0).toFixed(2),
-			Alimentacao: dadosAlimentacao.reduce((anterior, atual) => anterior + (atual.valor || 0), 0).toFixed(2)
+			Geral: dadosGeral.reduce(somar, 0).toFixed(2),
+			Transporte: dadosTransporte.reduce(somar, 0).toFixed(2),
+			Alimentacao: dadosAlimentacao.reduce(somar, 0).toFixed(2)
+		}
+
+		function somar(old: number, item: Gasto): number {
+			if (!item.valor) {
+				return old
+			}
+
+			if (item.destino === 4) {
+				return old + item.valor / 2
+			}
+
+			return old + item.valor
 		}
 	}
 
