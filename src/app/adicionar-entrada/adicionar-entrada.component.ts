@@ -1,5 +1,6 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { EntradaService } from '../entradas';
+import * as moment from 'moment';
 
 type FormularioAdicionarEntrada = {
 	tipo: number,
@@ -34,10 +35,18 @@ export class AdicionarEntradaComponent {
 			alert("Preencha os campos para continuar")
 			return
 		}
+
+		let localMes = localStorage.getItem("mes")
+		let localAno = localStorage.getItem("ano")
+
+		let mes = localMes ? parseInt(localMes) : (moment().month() + 1)
+		let ano = localAno ? parseInt(localAno) : moment().year()
+
 		let sucesso = await this.EntradaService.inserirEntrada({
 			tipo_id: this.formulario.tipo,
 			nome: this.formulario.nome,
 			valor: this.formulario.valor,
+			data_registro: moment().set("month", (mes - 1)).set("year", ano).format("YYYY-MM-DD hh:mm:ss")
 		})
 
 		if (!sucesso) return

@@ -3,10 +3,11 @@ import axios from 'axios';
 import { urlApi } from 'src/app/constants';
 
 export type Entrada = {
-	id: number,
-	tipo_id: number,
-	valor: number,
+	id: number
+	tipo_id: number
+	valor: number
 	nome: string
+	data_registro: string
 }
 
 @Injectable({
