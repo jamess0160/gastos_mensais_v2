@@ -37,7 +37,7 @@ export class InicioComponent implements OnInit {
     tiles: Tile[] = []
     totalGastos: string = ""
     totalGastosInativos: string = ""
-    totalEntradas: string = ""
+    totalSalarios: string = ""
     entradasPessoais: string = ""
     restante: string = ""
     restanteInativos: string = ""
@@ -68,15 +68,15 @@ export class InicioComponent implements OnInit {
             return old
         }, 0).toFixed(2)
 
-        entradas = entradas.filter((item) => item.tipo_id === 1)
+        let salarios = entradas.filter((item) => item.tipo_id === 1)
 
         this.totalGastosInativos = this.tiles.reduce((anterior, atual) => anterior + parseFloat(atual.totalInativos), 0).toFixed(2)
         this.totalGastos = this.tiles.reduce((anterior, atual) => anterior + parseFloat(atual.total), 0).toFixed(2)
 
-        this.totalEntradas = entradas.reduce((anterior, atual) => anterior + atual.valor, 0).toFixed(2)
+        this.totalSalarios = salarios.reduce((anterior, atual) => anterior + atual.valor, 0).toFixed(2)
 
-        this.restante = (parseFloat(this.totalEntradas) - parseFloat(this.totalGastos)).toFixed(2)
-        this.restanteInativos = (parseFloat(this.totalEntradas) - parseFloat(this.totalGastosInativos)).toFixed(2)
+        this.restante = (parseFloat(this.totalSalarios) - parseFloat(this.totalGastos)).toFixed(2)
+        this.restanteInativos = (parseFloat(this.totalSalarios) + parseFloat(this.entradasPessoais) - parseFloat(this.totalGastosInativos)).toFixed(2)
 
         this.calcularGastosPessoais(mes, ano)
     }
