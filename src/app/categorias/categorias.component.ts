@@ -207,7 +207,7 @@ export class CategoriasComponent implements OnInit {
 
 		if (itemEditar.tipo) this.editarForm.tipo = itemEditar.tipo.toString()
 		if (itemEditar.valor) this.editarForm.valor = itemEditar.valor
-		if (itemEditar.data_registro) this.editarForm.data_registro = moment(itemEditar.data_registro).format('YYYY-MM-DD')
+		if (itemEditar.data_registro) this.editarForm.data_registro = moment(itemEditar.data_registro).format('YYYY-MM-DD HH:mm:ss')
 		if (itemEditar.id) this.editarForm.id = itemEditar.id
 
 		if (!this.editarForm.parcela && !this.editarForm.fixo) {
